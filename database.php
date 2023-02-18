@@ -1,12 +1,14 @@
 <?php
 
+
 function connect(): PDO
 {
+  require('credentials.php');
   try {
     return new PDO(
-      'mysql:host=baptiste-crepin.fr;dbname=u165180046_Films;charset=utf8',
-      'u165180046_Baptiste',
-      'phpExam1'
+      $dbHost,
+      $dbUser,
+      $dbPass,
     );
   } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
