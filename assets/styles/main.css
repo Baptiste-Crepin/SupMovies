@@ -1,0 +1,36 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h2 {
+  text-align: center;
+  color: brown;
+}
+
+form {
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+form p {
+  text-align: left;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  padding: .5em 1em;
+}
+
+p {
+  text-align: center;
+  margin: .3em;
+}
