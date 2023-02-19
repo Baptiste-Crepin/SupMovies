@@ -1,6 +1,4 @@
 <?php
-
-
 function connect(): PDO
 {
   require('credentials.php');
@@ -70,7 +68,7 @@ function userPassword(string $username, string $password): bool
 }
 
 
-function insertUser(string $username, string $password): void
+function insertUser(string $username, string $password): bool
 {
   try {
     $db = connect();
@@ -83,11 +81,14 @@ function insertUser(string $username, string $password): void
     ]);
 
     $users = $usersStatement->fetchAll();
+
+    return true;
   } catch (Exception $e) {
     if ($e->getCode() == 23000) {
       echo "User already exists";
     } else {
       echo $e->getMessage();
     }
+    return false;
   }
 }
