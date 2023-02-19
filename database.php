@@ -39,29 +39,28 @@ function userExist(string $username): bool
 
 function userPassword(string $username, string $password): bool
 {
+  if (!userExist($username)) {
+    return false;
+  }
+
   try {
-    if (!userExist($username)) {
-      return false;
-    }
-
-    // TODO: check password with crypting
-
     $db = connect();
-    $sql = 'SELECT username FROM users WHERE username = :username AND password = :password';
+    $sql = 'SELECT password FROM users WHERE username = :username';
     $usersStatement = $db->prepare($sql);
+
     $usersStatement->execute([
       'username' => $username,
-      'password' => $password,
     ]);
 
     $user = $usersStatement->fetchAll();
+    $hash = $user[0][0];
 
-    if ($user == null) {
+    if (!password_verify($password, $hash)) {
       throw new Exception('Wrong password');
     }
 
     return true;
-  } catch (Exception $e) {
+  } catch (\Exception $e) {
     echo $e->getMessage();
     return false;
   }
@@ -74,13 +73,15 @@ function insertUser(string $username, string $password): bool
     $db = connect();
     $sql = "INSERT INTO users(username,password) VALUES(:username, :password)";
     $usersStatement = $db->prepare($sql);
-    //TODO: password crypting
+
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+
     $usersStatement->execute([
       "username" => $username,
-      "password" => $password,
+      "password" => $hash,
     ]);
 
-    $users = $usersStatement->fetchAll();
+    $usersStatement->fetchAll();
 
     return true;
   } catch (Exception $e) {
