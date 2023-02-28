@@ -93,3 +93,60 @@ function insertUser(string $username, string $password): bool
     return false;
   }
 }
+
+function getTitle($name)
+{
+    try {
+        $db = connect();
+        $sql = 'SELECT original_title FROM movies WHERE original_title LIKE '%$name%'';
+        $original_tittle_statement = $db->prepare($sql);
+        $original_tittle_statement->execute();
+        $original_title = $original_tittle_statement->fetchAll();
+        return ($original_title);
+    } catch (Exception $e) {
+        die($e);
+    }
+}
+
+function getActor($name)
+{
+    try {
+        $db = connect();
+        $sql = 'SELECT actors FROM movies WHERE original_title LIKE '%$name%'';
+        $actor_statement = $db->prepare($sql);
+        $actor_statement->execute();
+        $actor = $actor_statement->fetchAll();
+        return ($actor);
+    } catch (Exception $e) {
+        die($e);
+    }
+}
+
+function  getDirector($name)
+{
+    try {
+        $db = connect();
+        $sql = 'SELECT director FROM movies WHERE original_title LIKE '%$name%'';
+        $director_statement = $db->prepare($sql);
+        $director_statement->execute();
+        $director = $director_statement->fetchAll();
+        return ($director);
+    } catch (Exception $e) {
+        die($e);
+    }
+}
+
+function getReleaseDate($name)
+{
+    try {
+        $db = connect();
+        $sql = 'SELECT release_date FROM movies WHERE original_title LIKE '%$name%'';
+        $release_date_statement = $db->prepare($sql);
+        $release_date_statement->execute();
+        $release_date = $release_date_statement->fetchAll();
+        return ($release_date);
+    } catch (Exception $e) {
+        die($e);
+    }
+}
+?>

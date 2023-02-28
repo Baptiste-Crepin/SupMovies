@@ -15,7 +15,10 @@
     <a href="./">
       <h1>SupMovies</h1>
     </a>
-    <input type="text">
+    <form action="search_bar.php" method="POST">
+      <input type="text" id="search-input" placeholder="Rechercher...">
+      <button type="submit">Rechercher</button>
+    </form>
     <span></span>
     <div id="account">
       <?php require_once('profilePic.php'); ?>
