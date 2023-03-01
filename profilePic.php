@@ -23,15 +23,18 @@ function displayAccount(): void
     return;
   }
 
-  if (!fileExists()) {
-    $Img = '<img src="https://baptiste-crepin.fr/SupMovies/UserPics/default/1">';
-    echo '<label for="item1">' . $Img . '</label>';
-    return;
-  }
+  if (fileExists()) $Img = '<img src="https://baptiste-crepin.fr/SupMovies/UserPics/' . $_SESSION['username'] . '">';
+  else $Img = '<img src="https://baptiste-crepin.fr/SupMovies/UserPics/default/1">';
+
 
   echo '<p>' . $_SESSION['username'] . '</p>';
-  $Img = '<img src="https://baptiste-crepin.fr/SupMovies/UserPics/' . $_SESSION['username'] . '">';
-  echo '<label for="item1">' . $Img . '</label>';
+  echo '<label for="item1">' . $Img . '</label>
+        <input type="checkbox" id="item1" name="menu" class="dropdown-button">
+        <ul class="dropdown-menu">
+        <li><a href="./upload.php">Settings</a></li>
+        <li><a href="./cart.php">Cart</a></li>
+        <li><a href="./logout.php">Logout</a></li>
+        </ul>';
 }
 
 displayAccount();

@@ -9,7 +9,26 @@ function connect(): PDO
       $dbPass,
     );
   } catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
+    // try to connect to local database if hostinger is down for the tests;
+    die(connectLocalDb($e));
+  }
+}
+function connectLocalDb($onlineExecption = null): PDO
+{
+  require('credentials.php');
+  try {
+    return new PDO(
+      "mysql:host=$localHost;dbname=$localName",
+      $localUser,
+      $localPass
+    );
+  } catch (Exception $e) {
+    if ($onlineExecption == null) {
+      die('Local database error : ' . $e->getMessage());
+    }
+    die('Hostinger database error : ' . $onlineExecption->getMessage() .
+      '<br>' .
+      'Local database error : ' . $e->getMessage());
   }
 }
 
@@ -96,57 +115,120 @@ function insertUser(string $username, string $password): bool
 
 function getTitle($name)
 {
-    try {
-        $db = connect();
-        $sql = 'SELECT original_title FROM movies WHERE original_title LIKE '%$name%'';
-        $original_tittle_statement = $db->prepare($sql);
-        $original_tittle_statement->execute();
-        $original_title = $original_tittle_statement->fetchAll();
-        return ($original_title);
-    } catch (Exception $e) {
-        die($e);
-    }
+  try {
+    $db = connect();
+    $sql = 'SELECT original_title FROM movies WHERE original_title LIKE ' % $name % '';
+    $original_tittle_statement = $db->prepare($sql);
+    $original_tittle_statement->execute();
+    $original_title = $original_tittle_statement->fetchAll();
+    return ($original_title);
+  } catch (Exception $e) {
+    die($e);
+  }
 }
 
 function getActor($name)
 {
-    try {
-        $db = connect();
-        $sql = 'SELECT actors FROM movies WHERE original_title LIKE '%$name%'';
-        $actor_statement = $db->prepare($sql);
-        $actor_statement->execute();
-        $actor = $actor_statement->fetchAll();
-        return ($actor);
-    } catch (Exception $e) {
-        die($e);
-    }
+  try {
+    $db = connect();
+    $sql = 'SELECT actors FROM movies WHERE original_title LIKE ' % $name % '';
+    $actor_statement = $db->prepare($sql);
+    $actor_statement->execute();
+    $actor = $actor_statement->fetchAll();
+    return ($actor);
+  } catch (Exception $e) {
+    die($e);
+  }
 }
 
 function  getDirector($name)
 {
-    try {
-        $db = connect();
-        $sql = 'SELECT director FROM movies WHERE original_title LIKE '%$name%'';
-        $director_statement = $db->prepare($sql);
-        $director_statement->execute();
-        $director = $director_statement->fetchAll();
-        return ($director);
-    } catch (Exception $e) {
-        die($e);
-    }
+  try {
+    $db = connect();
+    $sql = 'SELECT director FROM movies WHERE original_title LIKE ' % $name % '';
+    $director_statement = $db->prepare($sql);
+    $director_statement->execute();
+    $director = $director_statement->fetchAll();
+    return ($director);
+  } catch (Exception $e) {
+    die($e);
+  }
 }
 
 function getReleaseDate($name)
 {
-    try {
-        $db = connect();
-        $sql = 'SELECT release_date FROM movies WHERE original_title LIKE '%$name%'';
-        $release_date_statement = $db->prepare($sql);
-        $release_date_statement->execute();
-        $release_date = $release_date_statement->fetchAll();
-        return ($release_date);
-    } catch (Exception $e) {
-        die($e);
-    }
+  try {
+    $db = connect();
+    $sql = 'SELECT release_date FROM movies WHERE original_title LIKE ' % $name % '';
+    $release_date_statement = $db->prepare($sql);
+    $release_date_statement->execute();
+    $release_date = $release_date_statement->fetchAll();
+    return ($release_date);
+  } catch (Exception $e) {
+    die($e);
+  }
 }
-?>
+
+function getFilmPrice($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT price FROM movies WHERE id = :id';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'id' => $id,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getTitleFromId($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT title FROM movies WHERE id = :id';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'id' => $id,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getPosterFromId($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT poster_path FROM movies WHERE id = :id';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'id' => $id,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getUserCart($username)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT value FROM cart_values WHERE owner = :owner';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'owner' => $username,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}

@@ -22,11 +22,6 @@
     <span></span>
     <div id="account">
       <?php require_once('profilePic.php'); ?>
-
-      <input type="checkbox" id="item1" name="menu" class="dropdown-button">
-      <ul class="dropdown-menu">
-        <li><a href="./upload.php">Settings</a></li>
-        <li><a href="./logout.php">Logout</a></li>
       </ul>
     </div>
   </div>
