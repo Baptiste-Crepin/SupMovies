@@ -3,6 +3,7 @@ function connect(): PDO
 {
   require('credentials.php');
   try {
+    throw new Exception('Hostinger database error');
     return new PDO(
       $dbHost,
       $dbUser,
@@ -10,7 +11,7 @@ function connect(): PDO
     );
   } catch (Exception $e) {
     // try to connect to local database if hostinger is down for the tests;
-    die(connectLocalDb($e));
+    return connectLocalDb($e);
   }
 }
 function connectLocalDb($onlineExecption = null): PDO
@@ -217,6 +218,23 @@ function getPosterFromId($id)
   }
 }
 
+function getQuantityFromId($owner, $value)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT quantity FROM cart_values WHERE owner = :owner and value = :value';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'owner' => $owner,
+      'value' => $value,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
 function getUserCart($username)
 {
   try {
@@ -225,6 +243,58 @@ function getUserCart($username)
     $cart_statement = $db->prepare($sql);
     $cart_statement->execute([
       'owner' => $username,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function removeEntry($owner, $value)
+{
+  try {
+    $db = connect();
+    $sql = 'DELETE FROM cart_values WHERE owner = :owner and value = :value';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'owner' => $owner,
+      'value' => $value,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function addEntry($owner, $value)
+{
+  try {
+    $db = connect();
+    $sql = 'INSERT INTO cart_values(owner, value) VALUES(:owner, :value)';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'owner' => $owner,
+      'value' => $value,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function setQuantity($owner, $value, $quantity)
+{
+  try {
+    $db = connect();
+    $sql = 'UPDATE cart_values SET quantity = :quantity WHERE owner = :owner AND value = :value';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'owner' => $owner,
+      'value' => $value,
+      'quantity' => $quantity,
     ]);
     $cart = $cart_statement->fetchAll();
     return ($cart);

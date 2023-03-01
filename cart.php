@@ -2,35 +2,45 @@
 require_once('index.php');
 require_once('database.php');
 
-if (!isset($_SESSION['username'])) {
+$owner = $_SESSION['username'];
+if (!isset($owner)) {
   header('Location: ./login.php');
   exit();
 }
 
-$cart = getUserCart($_SESSION['username']);
-$filmList = getFilmArray($cart);
+$cart = getUserCart($owner);
+$filmList = getFilmArray($owner, $cart);
+if (count($filmList) == 0) {
+  echo '<h2>Your cart is empty</h2>';
+  return;
+}
 $totalPrice = getTotalPrice($filmList);
 $totalQuantity = getTotalQuantity($filmList);
 displayFilmList($filmList);
 displaySummary($totalPrice, $totalQuantity);
 
 
-
-function getFilmArray($cart)
+function getFilmArray($owner, $cart)
 {
   $filmList = [];
   foreach ($cart as $film) {
     $filmId = $film[0];
-    if (array_key_exists($filmId, $filmList)) {
-      $filmList[$filmId]['quantity'] += 1;
-    } else {
-      $filmList[$filmId] = [
-        'title' => getTitleFromId($filmId)[0][0],
-        'price' => getFilmPrice($filmId)[0][0],
-        'poster' => getPosterFromId($filmId)[0][0],
-        'quantity' => 1
-      ];
-    }
+
+    $filmTitle = getTitleFromId($filmId)[0][0];
+    $filmPrice = getFilmPrice($filmId)[0][0];
+    $filmPoster = getPosterFromId($filmId)[0][0];
+    $filmQuantity = getQuantityFromId($owner, $filmId)[0][0];
+
+    if (isset($_GET['delete']) && $filmId == $_GET['id'] && $_GET['delete'] == 'true') continue;
+    if (isset($_GET['id']) && $filmId == $_GET['id']) $filmQuantity = $_GET['quantity'];
+
+    $filmList[$filmId] = [
+      'id' => $filmId,
+      'title' => $filmTitle,
+      'price' => $filmPrice,
+      'poster' => $filmPoster,
+      'quantity' => $filmQuantity,
+    ];
   };
   return $filmList;
 }
@@ -53,6 +63,19 @@ function getTotalPrice($filmList)
   return $totalPrice;
 }
 
+function changeQuantity()
+{
+  $owner = $_SESSION['username'];
+
+  if (isset($_GET['delete']) && $_GET['delete'] == 'true') {
+    removeEntry($owner, $_GET['id']);
+  }
+  if (isset($_GET['quantity']) or !empty($_GET['quantity'])) {
+    setQuantity($owner, $_GET['id'], $_GET['quantity']);
+  }
+}
+
+
 function displayFilmList($filmList)
 {
   echo '<main>';
@@ -61,9 +84,30 @@ function displayFilmList($filmList)
     echo '<tr class="filmCard">';
     echo '<td>';
     echo '<h3>' . $film['title'] . '</h3>';
+    echo '<p>' . $film['price'] . ' €</p>';
     echo '<div class="informations">';
-    echo '<p>' . $film['quantity'] . ' Movie ' . $film['price'] * $film['quantity'] . ' €</p>';
+    echo '<form class="amount" method="get" action="cart.php">';
+    echo '<input type="hidden" name="id", value="' . $film['id'] . '">';
+
+    echo '<input type="number" min="1" max="100" name="quantity", value="' . $film['quantity'] . '">';
+    echo '<p>' . $film['quantity'] . '</p>';
+
+    echo '</form>';
+
+    echo  '<p>Movies</p>';
+    if ($film['quantity'] > 1) {
+      echo '<p> ' . $film['quantity'] * $film['price'] . ' €</p>';
+    }
     echo '</div>';
+    echo '<form class="amount" method="get" action="cart.php">';
+    echo '<input type="hidden" name="id", value="' . $film['id'] . '">';
+
+    echo '<button type="submit" name="delete" value="true" onclick="window.location.reload(true);">';
+    echo '<img class="icons"  src="./assets/icons/trash-solid.svg">';
+    echo '</button>';
+
+    echo '</form>';
+
     echo '</td><td>';
     echo '<img class="poster" src="https://image.tmdb.org/t/p/original' . $film['poster'] . '">';
     echo '</td></tr>';
@@ -73,7 +117,7 @@ function displayFilmList($filmList)
 
 function displaySummary($totalPrice, $totalQuantity)
 {
-  $shipingPrice = $totalQuantity * 0.67;
+  $shipingPrice = $totalQuantity * 0.27;
   echo '<div id="summary" class="filmCard">';
   echo '<div class="summary-price">';
   echo '<p>' . $totalQuantity . ' Movies</p>';
@@ -87,23 +131,33 @@ function displaySummary($totalPrice, $totalQuantity)
   echo '</div>';
   echo '</main>';
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+  changeQuantity();
+}
 ?>
 
 <style>
   main {
     display: flex;
     gap: 2rem;
+    width: 90%;
   }
 
   .cartContent {
-    width: 60%;
+    width: 70%;
     border-collapse: collapse;
   }
 
   .informations {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .informations p {
+    margin: 0;
   }
 
   .summary-price {
@@ -150,6 +204,15 @@ function displaySummary($totalPrice, $totalQuantity)
     margin-top: 1.5rem;
   }
 
+  .amount {
+    gap: 1em;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
   .filmCard {
     position: relative;
     display: flex;
@@ -169,6 +232,10 @@ function displaySummary($totalPrice, $totalQuantity)
     justify-content: space-evenly;
     width: 80%;
     height: 100%;
+  }
+
+  .icons {
+    height: 1.5em;
   }
 
   .poster {
