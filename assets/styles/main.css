@@ -9,11 +9,6 @@ body {
   color: #fff;
 }
 
-h2 {
-  text-align: center;
-  color: brown;
-}
-
 form {
   gap: 1em;
   display: flex;

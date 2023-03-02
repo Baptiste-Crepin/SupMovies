@@ -186,6 +186,20 @@ function getFilmPrice($id)
   }
 }
 
+function getMoviePack($order, $limit = 20)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT * FROM movies ORDER BY ' . $order . ' DESC LIMIT ' . $limit;
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
 function getTitleFromId($id)
 {
   try {

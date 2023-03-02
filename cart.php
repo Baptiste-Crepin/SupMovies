@@ -1,6 +1,6 @@
 <?php
-require_once('index.php');
-require_once('database.php');
+require_once("./header.php");
+require_once('./database.php');
 
 $owner = $_SESSION['username'];
 if (!isset($owner)) {

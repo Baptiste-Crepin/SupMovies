@@ -1,5 +1,4 @@
 <?php
-require_once('index.php');
 
 function fileExists(): bool
 {
@@ -13,11 +12,19 @@ function fileExists(): bool
   }
 }
 
+function getUsername()
+{
+  session_start();
+  if (!isset($_SESSION['username']) or empty($_SESSION['username'])) {
+    return null;
+  }
+  return $_SESSION['username'];
+}
 
 function displayAccount(): void
 {
-  session_start();
-  if (!isset($_SESSION['username'])) {
+  $user = getUsername();
+  if (!$user) {
     echo '<a href="./login.php"><button>Log in</button></a>';
     echo '<a href="./register.php"><button>Register</button></a>';
     return;
