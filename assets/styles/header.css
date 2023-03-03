@@ -1,0 +1,76 @@
+#header {
+  display: inherit;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  height: 15vh;
+  background-color: #1E272E;
+  color: #fff;
+  margin-bottom: 3rem;
+}
+
+#header h1 {
+  width: 20vw;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #e8e6e3;
+}
+
+#header input {
+  width: 35vw;
+  border: .3em solid rgb(140, 130, 115);
+  background-color: #2b2a33;
+  color: #e8e6e3;
+  border-radius: 25px;
+  padding: 1em;
+}
+
+#header span {
+  width: 20vw;
+}
+
+#header #account {
+  width: 25vw;
+  align-items: center;
+  justify-content: center;
+  display: inherit;
+  gap: 1em;
+}
+
+#header #account img {
+  height: 7vh;
+  aspect-ratio: 1;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+#header #account button {
+  padding: .5em 1em;
+  background-color: #34495E;
+  color: #fff;
+  border-color: rgb(140, 130, 115);
+}
+
+#header #account .dropdown-menu {
+  display: none;
+  position: relative;
+  top: 4em;
+  left: -5em;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+#header #account .dropdown-menu li {
+  width: max-content;
+}
+
+#header #account input[type="checkbox"] {
+  display: none;
+}
+
+#header #account input[type="checkbox"]:checked+.dropdown-menu {
+  display: block;
+  width: max-content;
+}

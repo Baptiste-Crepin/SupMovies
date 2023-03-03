@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<link href="./assets/styles/main.css" media="all" rel="stylesheet" type="text/css">
+<link href="./assets/styles/cart.css" media="all" rel="stylesheet" type="text/css">
 <?php
 require_once("./header.php");
 require_once('./database.php');
@@ -16,8 +19,10 @@ if (count($filmList) == 0) {
 }
 $totalPrice = getTotalPrice($filmList);
 $totalQuantity = getTotalQuantity($filmList);
+echo '<main>';
 displayFilmList($filmList);
 displaySummary($totalPrice, $totalQuantity);
+echo '</main>';
 
 
 function getFilmArray($owner, $cart)
@@ -45,6 +50,7 @@ function getFilmArray($owner, $cart)
   return $filmList;
 }
 
+
 function getTotalQuantity($filmList)
 {
   $totalQuantity = 0;
@@ -63,7 +69,7 @@ function getTotalPrice($filmList)
   return $totalPrice;
 }
 
-function changeQuantity()
+function updateInfos()
 {
   $owner = $_SESSION['username'];
 
@@ -75,173 +81,78 @@ function changeQuantity()
   }
 }
 
-
 function displayFilmList($filmList)
 {
-  echo '<main>';
-  echo '<table class="cartContent">';
+  $output = <<<HTML
+      <table class="cartContent">
+  HTML;
   foreach ($filmList as $film) {
-    echo '<tr class="filmCard">';
-    echo '<td>';
-    echo '<h3>' . $film['title'] . '</h3>';
-    echo '<p>' . $film['price'] . ' €</p>';
-    echo '<div class="informations">';
-    echo '<form class="amount" method="get" action="cart.php">';
-    echo '<input type="hidden" name="id", value="' . $film['id'] . '">';
-
-    echo '<input type="number" min="1" max="100" name="quantity", value="' . $film['quantity'] . '">';
-    echo '<p>' . $film['quantity'] . '</p>';
-
-    echo '</form>';
-
-    echo  '<p>Movies</p>';
+    $output .= <<<HTML
+        <tr class="filmCard">
+          <td>
+            <h3> {$film['title']} </h3>
+            <p> {$film['price']} €</p>
+            <div class="informations">
+              <form class="amount" method="get" action="cart.php">
+                <input type="hidden" name="id", value=" {$film['id']} ">
+        
+                <input type="number" min="1" max="100" name="quantity", value="' {$film['quantity']} '">
+                <p> {$film['quantity']} </p>
+        
+              </form>
+        
+              <p>Movies</p>
+    HTML;
     if ($film['quantity'] > 1) {
-      echo '<p> ' . $film['quantity'] * $film['price'] . ' €</p>';
+      $bunchPrice = $film['quantity'] * $film['price'];
+      $output .= <<<HTML
+      <p> {$bunchPrice} €</p>
+      HTML;
     }
-    echo '</div>';
-    echo '<form class="amount" method="get" action="cart.php">';
-    echo '<input type="hidden" name="id", value="' . $film['id'] . '">';
+    $output .= <<<HTML
+            </div>
+            <form class="amount" method="get" action="cart.php">
+              <input type="hidden" name="id", value=" {$film['id']} ">
 
-    echo '<button type="submit" name="delete" value="true" onclick="window.location.reload(true);">';
-    echo '<img class="icons"  src="./assets/icons/trash-solid.svg">';
-    echo '</button>';
+              <button type="submit" name="delete" value="true" onclick="window.location.reload(true);">
+                <img class="icons"  src="./assets/icons/trash-solid.svg">
+              </button>
 
-    echo '</form>';
-
-    echo '</td><td>';
-    echo '<img class="poster" src="https://image.tmdb.org/t/p/original' . $film['poster'] . '">';
-    echo '</td></tr>';
+            </form>
+          </td>
+          <td>
+            <img class="poster" src="https://image.tmdb.org/t/p/original{$film['poster']} ">
+          </td>
+        </tr>
+    HTML;
   }
-  echo '</table>';
+  $output .= <<<HTML
+      </table>
+  HTML;
+  echo $output;
 }
 
 function displaySummary($totalPrice, $totalQuantity)
 {
   $shipingPrice = $totalQuantity * 0.27;
-  echo '<div id="summary" class="filmCard">';
-  echo '<div class="summary-price">';
-  echo '<p>' . $totalQuantity . ' Movies</p>';
-  echo '<h3 class="title">' . $totalPrice . ' €</h5>';
-  echo '</div>';
-  echo '<div class="summary-price">';
-  echo '<p> Shipping </p> <h3>' . $shipingPrice . ' €</h3>';
-  echo '</div>';
-  echo '<h3 id="totalPrice"> Total ' . $totalPrice + $shipingPrice . ' €</h3>';
-  echo '<button>Go to checkout</button>';
-  echo '</div>';
-  echo '</main>';
+  $TotalPlusShip = $totalPrice + $shipingPrice;
+  $output = <<<HTML
+  <div id="summary" class="filmCard">
+    <div class="summary-price">
+      <p> {$totalQuantity} Movies</p>
+      <h3 class="title"> {$totalPrice} €</h5>
+    </div>
+    <div class="summary-price">
+      <p>Shipping</p> <h3> {$shipingPrice} €</h3>
+    </div>
+    <h3 id="totalPrice"> Total {$TotalPlusShip} €</h3>
+    <button>Go to checkout</button>
+  </div>
+  HTML;
+  echo $output;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  changeQuantity();
+  updateInfos();
 }
 ?>
-
-<style>
-  main {
-    display: flex;
-    gap: 2rem;
-    width: 90%;
-  }
-
-  .cartContent {
-    width: 70%;
-    border-collapse: collapse;
-  }
-
-  .informations {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .informations p {
-    margin: 0;
-  }
-
-  .summary-price {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  h3 {
-    text-align: center;
-    margin: 0;
-  }
-
-  #summary {
-    width: 30%;
-    height: fit-content;
-    flex-direction: column;
-    gap: 0;
-    position: sticky;
-    top: 2rem;
-  }
-
-  #summary button {
-    padding: .5rem .3rem;
-    width: 80%;
-    margin: .3rem;
-    border-radius: 50px;
-    border: none;
-    font-size: 1.4rem;
-    font-weight: bold;
-    background-color: #FFA500;
-    color: #FFF;
-    transition: 0.3s ease-in-out;
-  }
-
-  #summary button:hover {
-    background-color: #FF6347;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
-  }
-
-  #summary #totalPrice {
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
-  }
-
-  .amount {
-    gap: 1em;
-    display: flex;
-    flex-direction: row;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .filmCard {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 30vh;
-    margin: 1rem 0;
-    padding: 1rem;
-    background: #008080;
-    border: 10px solid;
-    gap: 1rem;
-  }
-
-  td:nth-child(1) {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-    width: 80%;
-    height: 100%;
-  }
-
-  .icons {
-    height: 1.5em;
-  }
-
-  .poster {
-    aspect-ratio: 2/3;
-    border-radius: 10px;
-    border: solid black;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-</style>

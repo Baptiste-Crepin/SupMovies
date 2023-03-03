@@ -1,0 +1,106 @@
+  main {
+    display: flex;
+    gap: 2rem;
+    width: 90%;
+  }
+
+  .cartContent {
+    width: 70%;
+    border-collapse: collapse;
+  }
+
+  .informations {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .informations p {
+    margin: 0;
+  }
+
+  .summary-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  h3 {
+    text-align: center;
+    margin: 0;
+  }
+
+  #summary {
+    width: 30%;
+    height: fit-content;
+    flex-direction: column;
+    gap: 0;
+    position: sticky;
+    top: 2rem;
+  }
+
+  #summary button {
+    padding: .5rem .3rem;
+    width: 80%;
+    margin: .3rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.4rem;
+    font-weight: bold;
+    background-color: #FFA500;
+    color: #FFF;
+    transition: 0.3s ease-in-out;
+  }
+
+  #summary button:hover {
+    background-color: #FF6347;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+  }
+
+  #summary #totalPrice {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .amount {
+    gap: 1em;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .filmCard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 30vh;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #008080;
+    border: 10px solid;
+    gap: 1rem;
+  }
+
+  td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 80%;
+    height: 100%;
+  }
+
+  .icons {
+    height: 1.5em;
+  }
+
+  .poster {
+    aspect-ratio: 2/3;
+    border-radius: 10px;
+    border: solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }

@@ -186,11 +186,11 @@ function getFilmPrice($id)
   }
 }
 
-function getMoviePack($order, $limit = 20)
+function getMoviePack($order, $limit = 20, $offset = 0)
 {
   try {
     $db = connect();
-    $sql = 'SELECT * FROM movies ORDER BY ' . $order . ' DESC LIMIT ' . $limit;
+    $sql = 'SELECT * FROM movies ORDER BY ' . $order . ' DESC LIMIT ' . $limit . ' OFFSET ' . $offset;
     $cart_statement = $db->prepare($sql);
     $cart_statement->execute([]);
     $cart = $cart_statement->fetchAll();
@@ -312,6 +312,21 @@ function setQuantity($owner, $value, $quantity)
     ]);
     $cart = $cart_statement->fetchAll();
     return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getLastPage($RowPerPage)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT CEIL(COUNT(*) / ' . $RowPerPage . ') AS last_page FROM movies';
+
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart[0][0]);
   } catch (Exception $e) {
     die($e);
   }

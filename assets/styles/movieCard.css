@@ -1,0 +1,163 @@
+.trailer .video {
+  width: 560px;
+  height: 315px;
+  box-shadow: 0 130px 1000px rgb(0, 0, 0);
+}
+
+.trailer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trailer .movie-card {
+  background: none;
+  box-shadow: none;
+}
+
+section[id^="Page"] :nth-child(2) {
+  flex-wrap: wrap;
+}
+
+section[id^="Page"] :nth-child(2) .poster {
+  width: 25vh;
+}
+
+.movie-group {
+  background-color: #bdc3c7;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: #222;
+  width: 80%;
+}
+
+.movie-card-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  background-color: #7f8c8d;
+  padding: 1rem;
+}
+
+.movie-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min-content;
+  background: #95a5a6;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+.movie-title {
+  margin: 0 1rem;
+  height: 8vh;
+}
+
+.title {
+  color: #222;
+}
+
+.movie-infos {
+  margin: 0 1rem;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex p {
+  margin: 0 .3rem;
+}
+
+.movie-card h3 {
+  font-size: .9rem;
+  text-align: center;
+}
+
+.poster {
+  aspect-ratio: 2/3;
+  width: 12vw;
+  height: auto;
+}
+
+.backdrop {
+  width: 80%;
+  position: absolute;
+  aspect-ratio: auto;
+  height: auto;
+
+}
+
+.icons {
+  height: 1.5em;
+  filter: invert(9%) sepia(6%) saturate(15%) hue-rotate(319deg) brightness(91%) contrast(87%);
+}
+
+#vote {
+  filter: invert(83%) sepia(40%) saturate(7030%) hue-rotate(1deg) brightness(106%) contrast(106%)
+}
+
+.page-swap {
+  background-color: #bdc3c7;
+  padding: 1rem;
+  color: #222;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 25px;
+  margin: 2rem;
+}
+
+
+.page-swap p,
+.page-swap a {
+  margin: 0;
+  padding: 0;
+  width: 34%;
+  text-align: center;
+  background: #7f8c8d;
+  height: 5vh;
+  border-radius: inherit;
+  margin: 0 0.5rem;
+}
+
+.page-swap p {
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-swap a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.page-swap button {
+  text-align: center;
+  width: 90%;
+  padding: .3rem;
+  border-radius: 50px;
+  border: none;
+  text-decoration: none;
+  background: none;
+  transition: .3s ease-in-out;
+}
+
+.page-swap button:hover {
+  background: #bdc3c7;
+}
