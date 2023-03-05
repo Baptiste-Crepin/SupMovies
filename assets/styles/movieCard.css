@@ -15,12 +15,31 @@
   box-shadow: none;
 }
 
-section[id^="Page"] :nth-child(2) {
-  flex-wrap: wrap;
-}
-
 section[id^="Page"] :nth-child(2) .poster {
   width: 25vh;
+}
+
+section[id^="Page"] .movie-card-group {
+  max-height: 100%;
+}
+
+section[id^="Page"] .movie-card-group {
+  max-height: 100%;
+}
+
+section[id^="Page"] .movie-card {
+  height: 50vh;
+  width: min-content;
+}
+
+section[id^="Page"] .movie-infos {
+  flex-direction: row;
+}
+
+section[id^="Page"] .poster {
+  aspect-ratio: 2/3;
+  width: 12vw;
+  height: auto;
 }
 
 .movie-group {
@@ -37,21 +56,35 @@ section[id^="Page"] :nth-child(2) .poster {
   justify-content: center;
   background-color: #7f8c8d;
   padding: 1rem;
+  flex-wrap: wrap;
+  overflow: hidden;
+  height: auto;
+  max-height: 350px;
 }
 
 .movie-card {
   position: relative;
   display: flex;
   align-items: center;
-  width: min-content;
+  width: 150px;
   background: #95a5a6;
   flex-direction: column;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+  height: 350px;
+}
+
+.movie-poster {
+  object-fit: cover;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .movie-title {
   margin: 0 1rem;
   height: 8vh;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .title {
@@ -86,8 +119,7 @@ section[id^="Page"] :nth-child(2) .poster {
 
 .poster {
   aspect-ratio: 2/3;
-  width: 12vw;
-  height: auto;
+  width: 100%;
 }
 
 .backdrop {
@@ -96,15 +128,6 @@ section[id^="Page"] :nth-child(2) .poster {
   aspect-ratio: auto;
   height: auto;
 
-}
-
-.icons {
-  height: 1.5em;
-  filter: invert(9%) sepia(6%) saturate(15%) hue-rotate(319deg) brightness(91%) contrast(87%);
-}
-
-#vote {
-  filter: invert(83%) sepia(40%) saturate(7030%) hue-rotate(1deg) brightness(106%) contrast(106%)
 }
 
 .page-swap {

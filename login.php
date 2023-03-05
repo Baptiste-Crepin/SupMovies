@@ -1,7 +1,9 @@
 <?php
 
-require_once('./loginPage.php');
-session_start();
+require_once('./loginTemplate.php');
+require_once('createForm.php');
+echo createForm('login');
+echo footer('register', 'Create your SupMovies account');
 
 function login(): bool
 {
@@ -15,10 +17,11 @@ function login(): bool
     return false;
   }
 
+  session_start();
   $_SESSION['username'] = $_POST['username'];
 
-  header('Refresh: 2;URL=./index.php');
-  echo "<p>logged in</p>";
+  header('Refresh: 1;URL=./index.php');
+  echo "<p>Welcome {$_SESSION['username']}</p>";
   echo "<p>You will now be redirected...</p>";
   return true;
 }

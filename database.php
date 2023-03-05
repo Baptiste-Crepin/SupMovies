@@ -317,14 +317,14 @@ function setQuantity($owner, $value, $quantity)
   }
 }
 
-function getLastPage($RowPerPage)
+function getLastPage($rowPerPage)
 {
   try {
     $db = connect();
-    $sql = 'SELECT CEIL(COUNT(*) / ' . $RowPerPage . ') AS last_page FROM movies';
+    $sql = 'SELECT CEIL(COUNT(*) / ?) AS last_page FROM movies';
 
     $cart_statement = $db->prepare($sql);
-    $cart_statement->execute([]);
+    $cart_statement->execute([$rowPerPage]);
     $cart = $cart_statement->fetchAll();
     return ($cart[0][0]);
   } catch (Exception $e) {

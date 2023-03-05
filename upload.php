@@ -57,7 +57,7 @@ function addImg(): bool
 
   $redirectURL = 'https://baptiste-crepin.fr/SupMovies/UserPics/' . $fileName;
   echo '<H2>File uploaded successfully</H2>';
-  echo '<a href="' . $redirectURL . '"><img src="https://baptiste-crepin.fr/SupMovies/UserPics/' . $fileName . '"></a>';
+  echo '<a href="' . $redirectURL . '"><img draggable="false" src="https://baptiste-crepin.fr/SupMovies/UserPics/' . $fileName . '"></a>';
 
 
   header('Refresh: 5;URL=./index.php');

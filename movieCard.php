@@ -46,11 +46,11 @@ function createMovieCard($movie)
       <div class="movie-infos">
         <div class="flex">
           <p> {$movie['voteAverage']} </p>
-          <img class="icons" id="vote" src="./assets/icons/star-solid.svg">
+          <img class="icons orange" draggable="false" id="vote" src="./assets/icons/star-solid.svg">
         </div>
         <div class="flex">
           <p> {$movie['price']} </p>
-          <img class="icons" src="./assets/icons/euro-sign-solid.svg">
+          <img class="icons" draggable="false" src="./assets/icons/euro-sign-solid.svg">
         </div>
       </div>
     </div>
@@ -66,9 +66,9 @@ function createTrailerSubCard($movie)
     <div class="movie-infos">
       <div class="flex">
         <p>{$movie['voteAverage']}</p>
-        <img class="icons" id="vote" src="./assets/icons/star-solid.svg">
+        <img class="icons" draggable="false" id="vote" src="./assets/icons/star-solid.svg">
         <p>{$movie['price']}</p>
-        <img class="icons" src="./assets/icons/euro-sign-solid.svg">
+        <img class="icons orange" draggable="false" src="./assets/icons/euro-sign-solid.svg">
       </div>
     </div>
   </div>
@@ -80,13 +80,13 @@ function createTrailerCard($order)
   $movie = getMovie($order, 1);
   return <<<HTML
    <section class="trailer">
-   <img class="backdrop" src="https://image.tmdb.org/t/p/original{$movie['backdrop']}">
+   <img class="backdrop" draggable="false" src="https://image.tmdb.org/t/p/original{$movie['backdrop']}">
    createTrailerSubCard($movie
    </section>
   HTML;
 }
 
-function createMovieCardGroup($title, $order, $limit = 5, $offset = 0)
+function createMovieCardGroup($title, $order, $limit = 20, $offset = 0)
 {
   $offset = $offset * $limit;
   $movieList = getMovieArray($order, $limit, $offset);

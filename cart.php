@@ -115,7 +115,7 @@ function displayFilmList($filmList)
               <input type="hidden" name="id", value=" {$film['id']} ">
 
               <button type="submit" name="delete" value="true" onclick="window.location.reload(true);">
-                <img class="icons"  src="./assets/icons/trash-solid.svg">
+                <img class="icons" draggable="false" src="./assets/icons/trash-solid.svg">
               </button>
 
             </form>

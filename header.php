@@ -20,10 +20,8 @@
       <button type="submit">Rechercher</button>
     </form>
     <span></span>
-    <div id="account">
-      <?php require_once('profilePic.php'); ?>
-      </ul>
-    </div>
+    <?php require_once('profilePic.php');
+    echo displayAccount() ?>
   </div>
 </body>
 

@@ -7,6 +7,7 @@ body {
   height: 100vh;
   background-color: #2C3E50;
   color: #fff;
+  user-select: none;
 }
 
 main {
@@ -16,20 +17,8 @@ main {
   flex-direction: column;
 }
 
-form {
-  gap: 1em;
-  display: flex;
-  flex-direction: column;
-  margin: 3em;
-}
-
 form p {
   text-align: left;
-}
-
-.input {
-  display: flex;
-  flex-direction: column;
 }
 
 p {
@@ -37,7 +26,21 @@ p {
   margin: .3em;
 }
 
-img {
-  height: 30vh;
-  aspect-ratio: 1;
+.icons {
+  height: 1.5em;
+}
+
+.white {
+  filter: invert(97%) sepia(97%) saturate(0%) hue-rotate(308deg) brightness(104%) contrast(104%);
+}
+
+.orange {
+  filter: invert(83%) sepia(40%) saturate(7030%) hue-rotate(1deg) brightness(106%) contrast(106%)
+}
+
+a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
