@@ -57,7 +57,6 @@
   display: none;
 }
 
-/* Hide the dropdown menu by default */
 .dropdown {
   display: none;
   position: absolute;
@@ -68,15 +67,13 @@
   border: 5px solid #1E272E;
   border-top: none;
   padding: 0;
+  z-index: 1;
 }
 
-/* Show the dropdown menu when the checkbox is checked */
 .dropdown:checked~ul {
   display: block;
 }
 
-
-/* Style the dropdown menu items */
 .dropdown-content {
   background-color: #f1f1f1;
   border-bottom: 1px solid #ddd;
