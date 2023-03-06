@@ -37,7 +37,9 @@ function getFilmArray($owner, $cart)
     $filmQuantity = getQuantityFromId($owner, $filmId)[0][0];
 
     if (isset($_GET['delete']) && $filmId == $_GET['id'] && $_GET['delete'] == 'true') continue;
-    if (isset($_GET['id']) && $filmId == $_GET['id']) $filmQuantity = $_GET['quantity'];
+    if (isset($_GET['id']) && $filmId == $_GET['id'] && isset($_GET['quantity'])) {
+      $filmQuantity = $_GET['quantity'];
+    }
 
     $filmList[$filmId] = [
       'id' => $filmId,
@@ -84,50 +86,56 @@ function updateInfos()
 function displayFilmList($filmList)
 {
   $output = <<<HTML
-      <table class="cartContent">
+  <table class="cartContent">
   HTML;
   foreach ($filmList as $film) {
     $output .= <<<HTML
-        <tr class="filmCard">
-          <td>
-            <h3> {$film['title']} </h3>
-            <p> {$film['price']} €</p>
-            <div class="informations">
-              <form class="amount" method="get" action="cart.php">
-                <input type="hidden" name="id", value=" {$film['id']} ">
-        
-                <input type="number" min="1" max="100" name="quantity", value="' {$film['quantity']} '">
-                <p> {$film['quantity']} </p>
-        
-              </form>
-        
+    <tr class="filmCard">
+      <td>
+        <h3> {$film['title']} </h3>
+        <p> {$film['price']} €</p>
+        <div class="informations">
+          <form class="amount" method="get" action="cart.php">
+            <input type="hidden" name="id", value=" {$film['id']} ">
+            <select class="quantitySelector" name="quantity" onchange="this.form.submit();">
+              <option value="defaultQuantity" selected>{$film['quantity']}</option>
+      
+    HTML;
+    for ($i = 1; $i <= 99; $i++) {
+      if ($i == $film['quantity']) continue;
+      $output .= <<<HTML
+              <option value="{$i}">{$i}</option>
+              HTML;
+    }
+
+    $output .= <<<HTML
+                </select>
               <p>Movies</p>
     HTML;
+
     if ($film['quantity'] > 1) {
       $bunchPrice = $film['quantity'] * $film['price'];
       $output .= <<<HTML
-      <p> {$bunchPrice} €</p>
+              <p> {$bunchPrice} €</p>
       HTML;
     }
+
+
     $output .= <<<HTML
-            </div>
-            <form class="amount" method="get" action="cart.php">
-              <input type="hidden" name="id", value=" {$film['id']} ">
-
-              <button type="submit" name="delete" value="true" onclick="window.location.reload(true);">
-                <img class="icons" draggable="false" src="./assets/icons/trash-solid.svg">
-              </button>
-
-            </form>
-          </td>
-          <td>
-            <img class="poster" src="https://image.tmdb.org/t/p/original{$film['poster']} ">
-          </td>
-        </tr>
+            <button class="deleteButton" type="submit" name="delete" value="true" onclick="window.location.reload(true);">
+              <img class="icons" draggable="false" src="./assets/icons/trash-solid.svg">
+            </button>
+          </form>
+        </div>
+      </td>
+      <td>
+        <img class="poster" src="https://image.tmdb.org/t/p/original{$film['poster']}">
+      </td>
+    </tr>
     HTML;
   }
   $output .= <<<HTML
-      </table>
+  </table>
   HTML;
   echo $output;
 }
@@ -155,4 +163,10 @@ function displaySummary($totalPrice, $totalQuantity)
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   updateInfos();
 }
+
 ?>
+
+<!-- 
+<script>
+  this.form.submit()
+</script> -->

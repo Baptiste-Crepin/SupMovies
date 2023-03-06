@@ -34,7 +34,7 @@ function displayAccount(): string
   }
 
   if (fileExists()) {
-    $Img = "https://baptiste-crepin.fr/SupMovies/UserPics/ {$_SESSION['username']}";
+    $Img = "https://baptiste-crepin.fr/SupMovies/UserPics/{$_SESSION['username']}";
   } else {
     $Img = "https://baptiste-crepin.fr/SupMovies/UserPics/default/1";
   }
