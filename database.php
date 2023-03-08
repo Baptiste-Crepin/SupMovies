@@ -48,13 +48,11 @@ function userExist(string $username): bool
 
     if ($user == null) {
       throw new Exception('User not found');
-      return false;
     }
 
     return true;
   } catch (Exception $e) {
-    echo $e->getMessage();
-    return false;
+    die("<h3 class='error'>" . $e->getMessage() . "</h3>");
   }
 }
 
@@ -82,7 +80,7 @@ function userPassword(string $username, string $password): bool
 
     return true;
   } catch (\Exception $e) {
-    echo $e->getMessage();
+    die("<h3 class='error'>" . $e->getMessage() . "</h3>");
     return false;
   }
 }
@@ -107,7 +105,7 @@ function insertUser(string $username, string $password): bool
     return true;
   } catch (Exception $e) {
     if ($e->getCode() == 23000) {
-      echo "User already exists";
+      echo "<p class='error'>User already exists</p>";
     } else {
       echo $e->getMessage();
     }

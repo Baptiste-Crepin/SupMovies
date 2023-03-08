@@ -68,3 +68,17 @@ a {
 .redirect button {
   font-size: 0.7rem;
 }
+
+.error {
+  font-size: 1.2rem;
+  color: #ec4134;
+  font-weight: bold;
+  background: #2f2d2d;
+  padding: 3rem;
+  border-radius: 2rem;
+  margin-top: 2rem;
+}
+
+.error h3 {
+  font-size: 1.4rem;
+}
