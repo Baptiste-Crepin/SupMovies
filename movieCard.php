@@ -41,7 +41,7 @@ function createMovieCard($movie)
 {
   return <<<HTML
   <div class="movie-card">
-    <img class="poster" draggable="false" src="https://image.tmdb.org/t/p/original{$movie['poster']} ">
+    <img class="poster" draggable="false" loading="lazy" src="https://image.tmdb.org/t/p/original{$movie['poster']}">
     <h3 class="movie-title , flex">{$movie['title']}</h3>
       <div class="movie-infos">
         <div class="flex">
@@ -81,12 +81,12 @@ function createTrailerCard($order)
   return <<<HTML
    <section class="trailer">
    <img class="backdrop" draggable="false" src="https://image.tmdb.org/t/p/original{$movie['backdrop']}">
-   createTrailerSubCard($movie
+   createTrailerSubCard($movie);
    </section>
   HTML;
 }
 
-function createMovieCardGroup($title, $order, $limit = 20, $offset = 0)
+function createMovieCardGroup($title, $order, $limit = 10, $offset = 0)
 {
   $offset = $offset * $limit;
   $movieList = getMovieArray($order, $limit, $offset);

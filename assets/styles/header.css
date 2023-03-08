@@ -99,6 +99,10 @@
   gap: 1rem;
 }
 
+#account .loginButton {
+  margin-right: 4rem;
+}
+
 #account .buttons .icons {
   height: 5vh;
 }

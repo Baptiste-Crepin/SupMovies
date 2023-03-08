@@ -12,13 +12,19 @@ function fileExists(): bool
   }
 }
 
+session_start();
 function getUsername(): string|null
 {
-  session_start();
   if (!isset($_SESSION['username']) or empty($_SESSION['username'])) {
     return null;
   }
   return $_SESSION['username'];
+}
+
+function getProfilePic()
+{
+  if (fileExists()) return "https://baptiste-crepin.fr/SupMovies/UserPics/{$_SESSION['username']}";
+  return "https://baptiste-crepin.fr/SupMovies/UserPics/default/1";
 }
 
 function displayAccount(): string
@@ -28,22 +34,20 @@ function displayAccount(): string
   if (!$user) {
     return <<<HTML
     <div id="account">
-    <a href="./login.php"><button>Log in</button></a>
+    <a class="loginButton" href="./login.php"><button>Log in</button></a>
     </div>
     HTML;
   }
 
-  if (fileExists()) {
-    $Img = "https://baptiste-crepin.fr/SupMovies/UserPics/{$_SESSION['username']}";
-  } else {
-    $Img = "https://baptiste-crepin.fr/SupMovies/UserPics/default/1";
-  }
+  $Img = getProfilePic();
+  // ?v= gives a diffenrent value each time you reload to force the browser to reload the cache for this particular picture
+  $Time = time();
 
 
   return <<<HTML
   <div id="account">
     <p> {$_SESSION['username']} </p>
-    <img class="profilePic" draggable="false" src="{$Img}" >
+    <img class="profilePic" draggable="false" src="{$Img}" ?v={$Time} >
     
     <div class="buttons">
       <a href="./cart.php"><img class="icons orange" draggable="false" src="./assets/icons/cart-shopping-solid.svg"></a>

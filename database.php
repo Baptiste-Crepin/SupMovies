@@ -3,7 +3,7 @@ function connect(): PDO
 {
   require('credentials.php');
   try {
-    throw new Exception('Hostinger database error');
+    // throw new Exception('Hostinger database error');
     return new PDO(
       $dbHost,
       $dbUser,
@@ -11,7 +11,8 @@ function connect(): PDO
     );
   } catch (Exception $e) {
     // try to connect to local database if hostinger is down for the tests;
-    return connectLocalDb($e);
+    // return connectLocalDb($e);
+    echo $e->getMessage();
   }
 }
 function connectLocalDb($onlineExecption = null): PDO

@@ -7,7 +7,7 @@ require_once("./header.php");
 require_once("./database.php");
 require_once("./movieCard.php");
 
-$currentPage = 1;
+$currentPage = 0;
 if (isset($_GET['page'])) $currentPage = $_GET['page'] - 1;
 
 echo '<main>';

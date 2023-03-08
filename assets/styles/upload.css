@@ -1,0 +1,53 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+
+#file-label {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #428bca;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"] {
+  padding: 1rem;
+}
+
+input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  z-index: -1;
+}
+
+.currentProfilePic {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 10px solid black;
+  margin: 1rem;
+  height: 35vh;
+}
+
+#loading {
+  display: none;
+}
+
+input[type="file"]:focus+#loading {
+  display: block;
+}
+
+input[type="file"]+#loading {
+  display: none;
+}

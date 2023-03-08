@@ -8,6 +8,8 @@
   <meta name="author" content="Baptiste Crepin, Martin Pierrache">
   <title>SupMovies</title>
   <link href="./assets/styles/header.css" media="all" rel="stylesheet" type="text/css">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/clapperboard-solid.svg">
+
 </head>
 
 <body>
