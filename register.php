@@ -2,7 +2,8 @@
 
 require_once('./loginTemplate.php');
 require_once('createForm.php');
-echo createForm('register');
+$optionalInputs = ['email'];
+echo createForm('register', $optionalInputs);
 echo footer('login', 'You already have an account ? Log in!');
 
 function register(): void
@@ -12,6 +13,9 @@ function register(): void
 
   require_once('database.php');
   if (!insertUser($_POST['username'], $_POST['password'])) return;
+
+  #optional inputs
+  updateEmail($_POST['username'], $_POST['email']);
 
   session_start();
   $_SESSION['username'] = $_POST['username'];
