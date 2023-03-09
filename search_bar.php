@@ -28,7 +28,7 @@
 <?php
 require_once('database.php');
 echo "test";
-#search bar
+
 if (isset($_POST["submit"])) {
   echo "test2";
   $res = $_POST["search"];
