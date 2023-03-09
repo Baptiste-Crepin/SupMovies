@@ -29,10 +29,12 @@
 require_once('database.php');
 echo "test";
 
-if (isset($_POST["submit"])) {
+if (isset($_GET["submit"])) {
   echo "test2";
-  $res = $_POST["search"];
+  $res = $_GET["search"];
   $film = getTitle($res);
+  $id = getId($res);
+  
   ?>
 
   <br><br><br>
@@ -45,7 +47,7 @@ if (isset($_POST["submit"])) {
     <?php
       foreach ($film as $f) {
         echo "<tr>";
-        echo "<td>" . $f[0] . "</td>";
+        echo "<td><a href=\"film.php?name_film=" . $f[0] . "\">" . $f[0] . "</a></td>";
         echo "</tr>";
       }
     ?>

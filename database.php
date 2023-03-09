@@ -127,6 +127,132 @@ function getTitle($name)
   }
 }
 
+function getTitleById($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT original_title FROM movies WHERE id = :id';
+    $original_tittle_statement = $db->prepare($sql);
+    $original_tittle_statement->execute([
+      'id' => $id,
+    ]);
+    $original_title = $original_tittle_statement->fetchAll();
+    return ($original_title);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getActorById($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT actors FROM movies WHERE id = :id';
+    $actor_statement = $db->prepare($sql);
+    $actor_statement->execute([
+      'id' => $id,
+    ]);
+    $actor = $actor_statement->fetchAll();
+    return ($actor);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getDirectorById($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT director FROM movies WHERE id = :id';
+    $director_statement = $db->prepare($sql);
+    $director_statement->execute([
+      'id' => $id,
+    ]);
+    $director = $director_statement->fetchAll();
+    return ($director);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getRealeseDateById($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT release_date FROM movies WHERE id = :id';
+    $year_statement = $db->prepare($sql);
+    $year_statement->execute([
+      'id' => $id,
+    ]);
+    $year = $year_statement->fetchAll();
+    return ($year);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+
+function getOverviewById($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT overview FROM movies WHERE id = :id';
+    $plot_statement = $db->prepare($sql);
+    $plot_statement->execute([
+      'id' => $id,
+    ]);
+    $plot = $plot_statement->fetchAll();
+    return ($plot);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getRatingById($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT vote_average FROM movies WHERE id = :id';
+    $rating_statement = $db->prepare($sql);
+    $rating_statement->execute([
+      'id' => $id,
+    ]);
+    $rating = $rating_statement->fetchAll();
+    return ($rating);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getIdByTitle($title)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT id FROM movies WHERE original_title LIKE "%' . $title . '%"';
+    $id_statement = $db->prepare($sql);
+    $id_statement->execute();
+    $id = $id_statement->fetchAll();
+    return ($id);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+
+function getId($name)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT id FROM movies WHERE original_title LIKE "%' . $name . '%"';
+    $id_statement = $db->prepare($sql);
+    $id_statement->execute();
+    $id = $id_statement->fetchAll();
+    return ($id);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
 function getActor($name)
 {
   try {
