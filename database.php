@@ -117,7 +117,7 @@ function getTitle($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT original_title FROM movies WHERE original_title LIKE ' % $name % '';
+    $sql = 'SELECT original_title FROM movies WHERE original_title LIKE "%' . $name . '%"';
     $original_tittle_statement = $db->prepare($sql);
     $original_tittle_statement->execute();
     $original_title = $original_tittle_statement->fetchAll();
