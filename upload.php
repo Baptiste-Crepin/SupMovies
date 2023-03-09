@@ -65,20 +65,40 @@ function addImg(): void
 
   echo <<<HTML
     <H2>File uploaded successfully</H2>
-    <p>Account created </p>
     <p>You will now be redirected...</p>
   HTML;
-  header('Refresh: 3;URL=./index.php');
+}
+
+function inputEmail()
+{
+  require_once('database.php');
+  if (!isset($_POST['email']) || $_POST['email'] == '') {
+    throw new Exception("Please enter an email");
+  }
+  updateEmail($_SESSION['username'], $_POST['email']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $maxErrors = 2;
+  $errorLogs = [];
   try {
     addImg();
   } catch (Exception $e) {
-    echo $e->getMessage();
+    $errorLogs[] = $e->getMessage();
+  }
+  try {
+    inputEmail();
+  } catch (Exception $e) {
+    $errorLogs[] = $e->getMessage();
+  }
+  if (count($errorLogs) == $maxErrors) {
+    foreach ($errorLogs as $error) {
+      echo "<p class='error'>" . $error . "</p>";
+    }
+  } else {
+    header('Refresh: 1;URL=./index.php');
   }
 }
-
 ?>
 
 <body>
@@ -89,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <form action="upload.php" method="POST" enctype="multipart/form-data">
       <label for="file" id="file-label">Select a file:</label>
       <input type="file" name="file" id="file" onchange="previewFile()">
+      <input type="email" name="email" id="email">
       <input type="submit" name="submit" value="Upload">
       <div id="loading" style="display: none;">Uploading...</div>
     </form>

@@ -2,6 +2,22 @@
 function connect(): PDO
 {
   require('credentials.php');
+  // this code is just here so that the tests can run on the local machine
+  $localIP = '127.0.0.1'; // baptiste's local IP
+  if ($_SERVER['SERVER_ADDR'] === $localIP) {
+    $connection = connectLocalDb();
+    if ($connection) return $connection;
+  }
+  try {
+    return connectOnline();
+  } catch (Exception $e) {
+    echo $e->getMessage();
+  }
+}
+
+function connectOnline(): PDO
+{
+  require('credentials.php');
   try {
     // throw new Exception('Hostinger database error');
     return new PDO(
@@ -10,12 +26,11 @@ function connect(): PDO
       $dbPass,
     );
   } catch (Exception $e) {
-    // try to connect to local database if hostinger is down for the tests;
-    // return connectLocalDb($e);
     echo $e->getMessage();
   }
 }
-function connectLocalDb($onlineExecption = null): PDO
+
+function connectLocalDb($onlineExecption = null): PDO | null
 {
   require('credentials.php');
   try {
@@ -25,12 +40,7 @@ function connectLocalDb($onlineExecption = null): PDO
       $localPass
     );
   } catch (Exception $e) {
-    if ($onlineExecption == null) {
-      die('Local database error : ' . $e->getMessage());
-    }
-    die('Hostinger database error : ' . $onlineExecption->getMessage() .
-      '<br>' .
-      'Local database error : ' . $e->getMessage());
+    return null;
   }
 }
 
@@ -113,6 +123,42 @@ function insertUser(string $username, string $password): bool
   }
 }
 
+function updateEmail(string $username, string $email): bool
+{
+  try {
+    $db = connect();
+    $sql = "UPDATE users SET email = :email WHERE username = :username";
+    $usersStatement = $db->prepare($sql);
+
+    $usersStatement->execute([
+      "username" => $username,
+      "email" => $email,
+    ]);
+
+    $usersStatement->fetchAll();
+
+    return true;
+  } catch (Exception $e) {
+    echo $e->getMessage();
+    return false;
+  }
+}
+
+function getEmail(string $username)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT email FROM users WHERE username = :username';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'username' => $username,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart[0]['email']);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
 function getTitle($name)
 {
   try {
@@ -297,6 +343,7 @@ function getReleaseDate($name)
 
 function getFilmPrice($id)
 {
+  echo ('price');
   try {
     $db = connect();
     $sql = 'SELECT price FROM movies WHERE id = :id';
@@ -325,33 +372,17 @@ function getMoviePack($order, $limit = 20, $offset = 0)
   }
 }
 
-function getTitleFromId($id)
+function getInfosFilmFromId($id, $infos)
 {
   try {
     $db = connect();
-    $sql = 'SELECT title FROM movies WHERE id = :id';
+    $sql = 'SELECT ' . implode(',', $infos) . ' FROM movies WHERE id = :id';
     $cart_statement = $db->prepare($sql);
     $cart_statement->execute([
       'id' => $id,
     ]);
     $cart = $cart_statement->fetchAll();
-    return ($cart);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
-
-function getPosterFromId($id)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT poster_path FROM movies WHERE id = :id';
-    $cart_statement = $db->prepare($sql);
-    $cart_statement->execute([
-      'id' => $id,
-    ]);
-    $cart = $cart_statement->fetchAll();
-    return ($cart);
+    return ($cart[0]);
   } catch (Exception $e) {
     die($e);
   }
@@ -426,6 +457,7 @@ function addEntry($owner, $value)
 
 function setQuantity($owner, $value, $quantity)
 {
+  echo 'setQuantity';
   try {
     $db = connect();
     $sql = 'UPDATE cart_values SET quantity = :quantity WHERE owner = :owner AND value = :value';

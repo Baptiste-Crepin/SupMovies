@@ -2,28 +2,31 @@
 
 require_once('./loginTemplate.php');
 require_once('createForm.php');
-echo createForm('register');
+$optionalInputs = ['email'];
+echo createForm('register', $optionalInputs);
 echo footer('login', 'You already have an account ? Log in!');
 
-function register(): bool
+function register(): void
 {
   require_once("./validInput.php");
-  if (!ValidFields()) {
-    return false;
-  }
+  if (!ValidFields()) return;
 
   require_once('database.php');
-  if (!insertUser($_POST['username'], $_POST['password'])) {
-    return false;
-  }
+  if (!insertUser($_POST['username'], $_POST['password'])) return;
+
+  #optional inputs
+  updateEmail($_POST['username'], $_POST['email']);
 
   session_start();
   $_SESSION['username'] = $_POST['username'];
 
   header('Refresh: 2;URL=./index.php');
-  echo "<p>Welcome {$_SESSION['username']}, your account has been created</p>";
-  echo "<p>You will now be redirected...</p>";
-  return true;
+  echo <<<HTML
+  <div class='success'>
+  <h3>Welcome {$_SESSION['username']}, your account has been created</h3>
+  <p>You will now be redirected...</p>
+  </div>
+  HTML;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
