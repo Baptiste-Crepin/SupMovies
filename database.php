@@ -345,7 +345,7 @@ function getPosterFromId($id)
 {
   try {
     $db = connect();
-    $sql = 'SELECT poster FROM movies WHERE id = :id';
+    $sql = 'SELECT poster_path FROM movies WHERE id = :id';
     $poster_statement = $db->prepare($sql);
     $poster_statement->execute([
       'id' => $id,
