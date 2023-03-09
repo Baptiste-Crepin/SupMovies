@@ -130,7 +130,7 @@ function pageSwap($currentPage = 1)
 
   for ($i = 1; $i <= 2; $i++) {
     $page = $currentPage + $i;
-    if ($page > getLastPage(20)) continue;
+    if ($page > $lastPage) continue;
     $output .= <<<HTML
       <a href="./index.php?page=$page"><button>$page</button></a>
       HTML;
