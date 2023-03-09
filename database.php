@@ -341,6 +341,22 @@ function getReleaseDate($name)
   }
 }
 
+function getPosterFromId($id)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT poster FROM movies WHERE id = :id';
+    $poster_statement = $db->prepare($sql);
+    $poster_statement->execute([
+      'id' => $id,
+    ]);
+    $poster = $poster_statement->fetchAll();
+    return ($poster);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
 function getFilmPrice($id)
 {
   echo ('price');
