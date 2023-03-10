@@ -76,6 +76,8 @@ section[id^="Page"] .poster {
   flex-direction: column;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
   height: 350px;
+  color: black;
+  font-weight: bold;
 }
 
 .movie-card:hover {

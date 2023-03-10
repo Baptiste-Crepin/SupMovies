@@ -107,9 +107,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <img class="currentProfilePic" src="<?php echo getProfilePic() ?>?v=<?php echo time() ?>">
 
     <form action="upload.php" method="POST" enctype="multipart/form-data">
-      <label for="file" id="file-label">Select a file:</label>
-      <input type="file" name="file" id="file" onchange="previewFile()">
-      <input type="email" name="email" id="email">
+      <div>
+        <label for="file" id="file-label">Select a file:</label>
+        <input type="file" name="file" id="file" onchange="previewFile()">
+      </div>
+      <div>
+        <label for="email" id="email-label">Change your email</label>
+        <input type="email" name="email" id="email">
+      </div>
       <input type="submit" name="submit" value="Upload">
       <div id="loading" style="display: none;">Uploading...</div>
     </form>
