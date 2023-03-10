@@ -504,3 +504,19 @@ function getLastPage($rowPerPage)
     die($e);
   }
 }
+
+function deleteWholeCart($owner)
+{
+  try {
+    $db = connect();
+    $sql = 'DELETE FROM cart_values WHERE owner = :owner';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'owner' => $owner,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}

@@ -66,6 +66,6 @@ if (getEmail($_SESSION['username'])) {
 
 
 // TODO: remove all entries from the cart
-
-// header('Location: ./index.php');
+deleteWholeCart($_SESSION['username']);
+header('Location: ./index.php');
 echo $message;
