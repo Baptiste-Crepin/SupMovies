@@ -15,8 +15,11 @@ echo '<main>';
 // createTrailerCard('popularity');
 // createTrailerCard('vote_average');
 
-echo createMovieCardGroup('New Movies', 'release_date');
-echo createMovieCardGroup('Highest Rated Movies', 'vote_average');
+if ($currentPage == 0) {
+  echo createMovieCardGroup('New Movies', 'release_date');
+  echo createMovieCardGroup('Highest Rated Movies', 'vote_average');
+}
+
 echo createMovieCardGroup('Page ' . $currentPage + 1, 'release_date', 20, $currentPage);
 
 

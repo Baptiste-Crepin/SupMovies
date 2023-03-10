@@ -12,7 +12,7 @@
 
 .movie-link {
   text-decoration: none;
-  color: white;
+  color: inherit;
 }
 
 .trailer .movie-card {
