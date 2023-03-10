@@ -10,6 +10,7 @@ function register(): void
 {
   require_once("./validInput.php");
   if (!ValidFields()) return;
+  if (!verifyCaptcha()) return;
 
   require_once('database.php');
   if (!insertUser($_POST['username'], $_POST['password'])) return;
@@ -17,7 +18,6 @@ function register(): void
   #optional inputs
   updateEmail($_POST['username'], $_POST['email']);
 
-  session_start();
   $_SESSION['username'] = $_POST['username'];
 
   header('Refresh: 2;URL=./index.php');

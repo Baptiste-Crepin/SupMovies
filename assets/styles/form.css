@@ -58,7 +58,9 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2rem;
 }
+
 
 a {
   text-align: center;
@@ -69,14 +71,21 @@ a {
   font-size: 0.7rem;
 }
 
-.error {
+.error,
+.countdown {
   font-size: 1.2rem;
   color: #ec4134;
   font-weight: bold;
   background: #2f2d2d;
   padding: 3rem;
   border-radius: 2rem;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
+}
+
+.countdown {
+  font-size: 1.3rem;
+  padding: 1rem;
+  margin-bottom: 0rem;
 }
 
 .success {
@@ -92,4 +101,11 @@ a {
 .error h3,
 .success h3 {
   font-size: 1.4rem;
+}
+
+.error h3,
+.error p,
+.success h3,
+.success p {
+  margin: 0.3rem;
 }
