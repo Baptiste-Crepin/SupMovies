@@ -48,14 +48,16 @@
             <?php echo '<p>Prix:' . $price  . '€</p>' ?>
             <!-- <form> -->
             <form method="get" action="film.php">
-                <label for="quantite">Quantité:</label>
-                <input type="hidden" id="id" name="id" value="<?php echo $id_film ?>">
-                <input type="number" id="quantite" name="quantite" min="1" max="10" value="1">
                 <br>
                 <?php if (!isset($_SESSION['username'])) {
                     echo '<a href="login.php">Connectez-vous pour acheter</a>';
                 } else {
-                    echo '<input type="submit" name="action" value="Acheter">';
+                    echo <<<HTML
+                        <input type="hidden" id="id" name="id" value="{$id_film}">
+                        <label for="quantite">Quantité:</label>
+                        <input type="number" id="quantite" name="quantite" min="1" max="10" value="1">
+                        <input type="submit" name="action" value="Acheter">
+                    HTML;
                 } ?>
             </form>
         </div>

@@ -1,6 +1,5 @@
 <?php
-include('./cartInfos.php');
-// Replace with your own credentials
+require_once('./cartInfos.php');
 require_once('./credentials.php');
 
 // Generate email content
@@ -64,8 +63,6 @@ if (getEmail($_SESSION['username'])) {
   }
 }
 
-
-// TODO: remove all entries from the cart
 deleteWholeCart($_SESSION['username']);
 header('Location: ./index.php');
 echo $message;
