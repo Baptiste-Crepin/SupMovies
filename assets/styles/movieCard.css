@@ -10,6 +10,11 @@
   align-items: center;
 }
 
+.movie-link {
+  text-decoration: none;
+  color: white;
+}
+
 .trailer .movie-card {
   background: none;
   box-shadow: none;
@@ -71,6 +76,10 @@ section[id^="Page"] .poster {
   flex-direction: column;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
   height: 350px;
+}
+
+.movie-card:hover {
+  box-shadow: 10px 10px 15px rgba(0, 0, 0);
 }
 
 .movie-poster {

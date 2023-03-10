@@ -40,6 +40,7 @@ function getMovieArray($order, $limit = 5, $offset = 0)
 function createMovieCard($movie)
 {
   return <<<HTML
+  <a class="movie-link" href="./film.php?name_film={$movie['title']}">
   <div class="movie-card">
     <img class="poster" draggable="false" loading="lazy" src="https://image.tmdb.org/t/p/original{$movie['poster']}">
     <h3 class="movie-title , flex">{$movie['title']}</h3>
@@ -54,6 +55,7 @@ function createMovieCard($movie)
         </div>
       </div>
     </div>
+  </a>
   HTML;
 }
 
