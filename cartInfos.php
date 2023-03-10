@@ -48,20 +48,13 @@ function getTotalPrice($filmList)
   return $totalPrice;
 }
 
-function updateInfos($filmList)
+function updateInfos()
 {
   $owner = $_SESSION['username'];
-
   if (isset($_GET['delete']) && $_GET['delete'] == 'true') {
-    foreach ($filmList as $film) {
-      if ($film['value'] == $_GET['id']) {
-        removeEntry($owner, $_GET['id']);
-      }
-    }
+    removeEntry($owner, $_GET['id']);
   }
-  var_dump($filmList);
-  if (isset($_GET['quantity']) or !empty($_GET['quantity'])) {
-    if ($_GET['quantity'] == $filmList[$_GET['id']][$_GET['quantity']]) return;
+  if (isset($_GET['quantity']) || !empty($_GET['quantity'])) {
     setQuantity($owner, $_GET['id'], $_GET['quantity']);
   }
 }
@@ -105,7 +98,8 @@ function displayFilmList($filmList)
 
 
     $output .= <<<HTML
-            <button class="deleteButton" type="submit" name="delete" value="true" onclick="window.location.reload(true);">
+            <button class="deleteButton" type="submit" name="delete" value="true">
+            <!-- <button class="deleteButton" type="submit" name="delete" value="true" onclick="window.location.reload(true);"> -->
               <img class="icons" draggable="false" src="./assets/icons/trash-solid.svg">
             </button>
           </form>

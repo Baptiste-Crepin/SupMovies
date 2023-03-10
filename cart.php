@@ -5,10 +5,15 @@
 require_once("./header.php");
 require_once('./cartInfos.php');
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+  updateInfos();
+}
+
 if (count($filmList) == 0) {
   echo '<h2>Your cart is empty</h2>';
   return;
 }
+
 $totalPrice = getTotalPrice($filmList);
 $totalQuantity = getTotalQuantity($filmList);
 
@@ -18,8 +23,6 @@ displaySummary($totalPrice, $totalQuantity);
 echo '</main>';
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  updateInfos($filmList);
-}
+
 
 ?>

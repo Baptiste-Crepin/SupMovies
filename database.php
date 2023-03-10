@@ -359,7 +359,6 @@ function getPosterFromId($id)
 
 function getFilmPrice($id)
 {
-  echo ('price');
   try {
     $db = connect();
     $sql = 'SELECT price FROM movies WHERE id = :id';
@@ -454,15 +453,17 @@ function removeEntry($owner, $value)
   }
 }
 
-function addEntry($owner, $value)
+function addEntry($owner, $value, $quantity = 1)
 {
+  echo 'addEntry' . $owner . $value . $quantity;
   try {
     $db = connect();
-    $sql = 'INSERT INTO cart_values(owner, value) VALUES(:owner, :value)';
+    $sql = 'INSERT INTO cart_values(owner, value, quantity) VALUES(:owner, :value, :quantity)';
     $cart_statement = $db->prepare($sql);
     $cart_statement->execute([
       'owner' => $owner,
       'value' => $value,
+      'quantity' => $quantity,
     ]);
     $cart = $cart_statement->fetchAll();
     return ($cart);
@@ -473,7 +474,6 @@ function addEntry($owner, $value)
 
 function setQuantity($owner, $value, $quantity)
 {
-  echo 'setQuantity';
   try {
     $db = connect();
     $sql = 'UPDATE cart_values SET quantity = :quantity WHERE owner = :owner AND value = :value';

@@ -26,18 +26,6 @@ p {
   margin: .3em;
 }
 
-.icons {
-  height: 1.5em;
-}
-
-.white {
-  filter: invert(97%) sepia(97%) saturate(0%) hue-rotate(308deg) brightness(104%) contrast(104%);
-}
-
-.orange {
-  filter: invert(83%) sepia(40%) saturate(7030%) hue-rotate(1deg) brightness(106%) contrast(106%)
-}
-
 a {
   text-decoration: none;
   display: flex;
