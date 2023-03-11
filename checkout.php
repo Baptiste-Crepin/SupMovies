@@ -65,6 +65,6 @@ $MovieIdsArray = implode(',', $MovieIdsArray);
 
 var_dump($MovieIdsArray);
 addCartToHistory($_SESSION['username'], $MovieIdsArray);
-// deleteWholeCart($_SESSION['username']);
-// header('Location: ./index.php');
+deleteWholeCart($_SESSION['username']);
+header('Location: ./index.php');
 echo $message;
