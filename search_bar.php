@@ -9,8 +9,7 @@
   <title>SupMovies</title>
   <!-- <link href="./assets/styles/header.css" media="all" rel="stylesheet" type="text/css"> -->
 </head>
-
-<body>
+<!-- <body>
   <div id="header">
     <a href="./">
       <h1>SupMovies</h1>
@@ -21,38 +20,54 @@
     </form>
     <span></span>
   </div>
-</body>
+</body> -->
 
 </html>
 
 <?php
+require_once('./header.php');
 require_once('database.php');
-echo "test";
 
 if (isset($_GET["submit"])) {
-  echo "test2";
   $res = $_GET["search"];
   $film = getTitle($res);
   $id = getId($res);
-  
+
+?>
+
+
+  <?php
+  require_once('./movieCard.php');
+  echo '<h1>Resultats de la recherche pour \'' . $res . '\'</h1>';
+  echo '<div class="movie-list">';
+  foreach ($film as $f) {
+    $a = getIdByTitle($f[0])[0][0];
+    $infos = getInfosFilmFromId($a, ['title', 'poster_path', 'price', 'vote_average']);
+    $movie = [
+      'id' => $a,
+      'title' => $infos['title'],
+      'poster' => $infos['poster_path'],
+      'price' => $infos['price'],
+      'voteAverage' => $infos['vote_average'],
+    ];
+    echo createMovieCard($movie);
+  }
+  echo '</div>';
   ?>
 
-  <br><br><br>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-
-    <?php
-      foreach ($film as $f) {
-        echo "<tr>";
-        echo "<td><a href=\"film.php?name_film=" . $f[0] . "\">" . $f[0] . "</a></td>";
-        echo "</tr>";
-      }
-    ?>
-
-  </table>
 <?php
 }
 ?>
+
+<style>
+  .movie-list {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .movie-card {
+    width: 13rem;
+    height: auto;
+  }
+</style>

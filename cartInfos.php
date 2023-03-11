@@ -150,9 +150,6 @@ if (!isset($owner)) {
   header('Location: ./login.php');
   exit();
 }
-// TODO Ajouter historique d’achat
-
-
 
 require_once('./database.php');
 $cart = getUserCart($owner);

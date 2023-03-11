@@ -163,7 +163,7 @@ function getTitle($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT original_title FROM movies WHERE original_title LIKE "%' . $name . '%"';
+    $sql = 'SELECT original_title FROM movies WHERE original_title LIKE "%' . $name . '%" LIMIT 25';
     $original_tittle_statement = $db->prepare($sql);
     $original_tittle_statement->execute();
     $original_title = $original_tittle_statement->fetchAll();
@@ -289,7 +289,7 @@ function getId($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT id FROM movies WHERE original_title LIKE "%' . $name . '%"';
+    $sql = 'SELECT id FROM movies WHERE original_title LIKE "%' . $name . '%" LIMIT 25';
     $id_statement = $db->prepare($sql);
     $id_statement->execute();
     $id = $id_statement->fetchAll();
