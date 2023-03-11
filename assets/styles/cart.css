@@ -120,3 +120,7 @@ td:nth-child(1) {
   background: none;
   border: none;
 }
+
+.button-link {
+  width: 100%;
+}

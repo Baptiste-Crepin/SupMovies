@@ -96,6 +96,35 @@ footer {
   margin-top: 20px;
 }
 
+.alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 5rem 0;
+  gap: 1rem;
+  background: #eee;
+  border: 10px solid;
+  border-radius: 50px;
+}
+
+a.redirect {
+  width: 40%;
+  text-align: center;
+}
+
+.redirect button {
+  width: 100%;
+  padding: 1rem 0;
+  background: #ffc800;
+  border: none;
+  border-radius: 15px;
+}
+
 /* Styles pour les médias mobiles */
 
 @media screen and (max-width: 768px) {

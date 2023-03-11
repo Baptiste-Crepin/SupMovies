@@ -106,7 +106,9 @@ function displayFilmList($filmList)
         </div>
       </td>
       <td>
-        <img class="poster" src="https://image.tmdb.org/t/p/original{$film['poster']}">
+        <a href="./film.php?name_film={$film['title']}">
+          <img class="poster" src="https://image.tmdb.org/t/p/original{$film['poster']}">
+        </a>
       </td>
     </tr>
     HTML;
@@ -137,7 +139,7 @@ function displaySummary($totalPrice, $totalQuantity)
       <p>Shipping</p> <h3> {$shipingPrice} €</h3>
     </div>
     <h3 id="totalPrice"> Total {$TotalOrderPrice} €</h3>
-    <a href="./checkout.php"><button>Go to checkout</button></a>
+    <a class="button-link" href="./checkout.php"><button>Go to checkout</button></a>
   </div>
   HTML;
   echo $output;
@@ -148,6 +150,9 @@ if (!isset($owner)) {
   header('Location: ./login.php');
   exit();
 }
+// TODO Ajouter historique d’achat
+
+
 
 require_once('./database.php');
 $cart = getUserCart($owner);

@@ -12,15 +12,6 @@
 <?php require_once('./header.php'); ?>
 
 <body>
-    <header>
-        <h1>Supmovie</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="search_bar.php">Films</a></li>
-            </ul>
-        </nav>
-    </header>
     <main>
         <div class="film-details">
             <?php
@@ -53,6 +44,7 @@
                     echo '<a href="login.php">Connectez-vous pour acheter</a>';
                 } else {
                     echo <<<HTML
+                        <input type="hidden" id="name_film" name="name_film" value="{$_GET['name_film']}">
                         <input type="hidden" id="id" name="id" value="{$id_film}">
                         <label for="quantite">Quantité:</label>
                         <input type="number" id="quantite" name="quantite" min="1" max="10" value="1">
@@ -74,10 +66,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!isset($_GET['action']) || $_GET['action'] != 'Acheter') return;
     if (!isset($_GET['quantite']) || empty($_GET['quantite']) || $_GET['quantite'] == 1) {
         addEntry($_SESSION['username'], $_GET['id']);
-        header('Location: cart.php');
-        return;
-    }
-    addEntry($_SESSION['username'], $_GET['id'], $_GET['quantite']);
-    header('Location: cart.php');
+    } else addEntry($_SESSION['username'], $_GET['id'], $_GET['quantite']);
+
+    echo <<<HTML
+    <div class='alert'>
+        <a class="redirect" href="index.php"><button>Continue browsing</button></a>
+        <a class="redirect" href="cart.php"><button>Go to cart</button></a>
+    </div>
+    HTML;
 }
 ?>

@@ -455,7 +455,6 @@ function removeEntry($owner, $value)
 
 function addEntry($owner, $value, $quantity = 1)
 {
-  echo 'addEntry' . $owner . $value . $quantity;
   try {
     $db = connect();
     $sql = 'INSERT INTO cart_values(owner, value, quantity) VALUES(:owner, :value, :quantity)';
