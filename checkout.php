@@ -57,6 +57,14 @@ if (getEmail($_SESSION['username'])) {
   }
 }
 
-deleteWholeCart($_SESSION['username']);
-header('Location: ./index.php');
+$MovieIdsArray = [];
+foreach ($filmList as $film) {
+  array_push($MovieIdsArray, $film['id']);
+}
+$MovieIdsArray = implode(',', $MovieIdsArray);
+
+var_dump($MovieIdsArray);
+addCartToHistory($_SESSION['username'], $MovieIdsArray);
+// deleteWholeCart($_SESSION['username']);
+// header('Location: ./index.php');
 echo $message;

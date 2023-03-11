@@ -4,13 +4,50 @@
 <?php
 require_once("./header.php");
 require_once('./cartInfos.php');
+require_once("./movieCard.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   updateInfos();
 }
 
+function getHistory($owner)
+{
+  $cartHistory = '<div class="history">';
+  $cartHistory .= '<h2>History</h2>';
+  $IDArray = [];
+  foreach (getCartHistory($owner) as $entryInfo) {
+    array_push($IDArray, $entryInfo['value']);
+    $movieIdList = explode(',', $entryInfo['value']);
+    $infos = ['title', 'price', 'poster_path', 'vote_average'];
+    if (count($movieIdList) > 0) {
+      $cartHistory .= '<h2>' . $entryInfo['timestamp'] . '</h2>';
+      $cartHistory .= '<div class="history-card">';
+      foreach ($movieIdList as $id) {
+        // echo $id;
+        $filmInfos = getInfosFilmFromId($id, $infos);
+        // var_dump($filmInfos);
+        $historyFilmList[$id] = [
+          'id' => $id,
+          'title' => $filmInfos['title'],
+          'price' => $filmInfos['price'],
+          'poster' => $filmInfos['poster_path'],
+          'voteAverage' => $filmInfos['vote_average'],
+        ];
+        $cartHistory .= createMovieCard($historyFilmList[$id]);
+      }
+      $cartHistory .= '</div>';
+      // var_dump($historyFilmList);
+    }
+  }
+  $cartHistory .= '</div>';
+  return $cartHistory;
+}
+
+$cartHistory = getHistory($owner);
+
 if (count($filmList) == 0) {
   echo '<h2>Your cart is empty</h2>';
+  echo $cartHistory;
   return;
 }
 
@@ -22,7 +59,7 @@ displayFilmList($filmList);
 displaySummary($totalPrice, $totalQuantity);
 echo '</main>';
 
-
+echo $cartHistory;
 
 
 ?>

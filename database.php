@@ -391,7 +391,8 @@ function getInfosFilmFromId($id, $infos)
 {
   try {
     $db = connect();
-    $sql = 'SELECT ' . implode(',', $infos) . ' FROM movies WHERE id = :id';
+    $sql = 'SELECT * FROM movies WHERE id = :id';
+    // $sql = 'SELECT ' . implode(',', $infos) . ' FROM movies WHERE id = :id';
     $cart_statement = $db->prepare($sql);
     $cart_statement->execute([
       'id' => $id,
@@ -509,6 +510,39 @@ function deleteWholeCart($owner)
   try {
     $db = connect();
     $sql = 'DELETE FROM cart_values WHERE owner = :owner';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'owner' => $owner,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function addCartToHistory($owner, $value)
+{
+  try {
+    $db = connect();
+    $sql = 'INSERT INTO cart_history (owner, value) VALUES(:owner, :value)';
+    $cart_statement = $db->prepare($sql);
+    $cart_statement->execute([
+      'owner' => $owner,
+      'value' => $value,
+    ]);
+    $cart = $cart_statement->fetchAll();
+    return ($cart);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getCartHistory($owner)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT value, timestamp FROM cart_history where owner = :owner ORDER BY timestamp DESC LIMIT 5;';
     $cart_statement = $db->prepare($sql);
     $cart_statement->execute([
       'owner' => $owner,

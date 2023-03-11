@@ -124,3 +124,36 @@ td:nth-child(1) {
 .button-link {
   width: 100%;
 }
+
+.history {
+  text-align: center;
+  width: 80%;
+  /* background-color: #FF6347; */
+  background-color: #3E887F;
+}
+
+.history-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  /* background-color: aqua; */
+  background-color: #3E886F;
+  padding: 1rem;
+}
+
+.history-card div {
+  background-color: #008080;
+  height: 50%;
+  box-shadow: none;
+  /* height: 275px; */
+  width: 100px;
+}
+
+.history-card div .poster {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  height: auto;
+}
