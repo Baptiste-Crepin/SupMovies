@@ -7,18 +7,19 @@ require_once("./database.php");
 
 ?>
 <body>
+<div id="test">
 <div id="Category">
     <h3>GENRES</h3>
     <table id="Panel_category">
     <tr>
     <td>
-    <a   href="">Latest</a>
+    <a   href="genre.php?">Latest</a>
     </td>
     <td>
     <a  href="">Newest</a>
     </td>
     <td>
-    <a  href="">Top view</a>
+    <a  href="genre.php?popular">Popular</a>
     </td>
     </tr>
     <tr >
@@ -100,17 +101,22 @@ require_once("./database.php");
     if (isset($_GET["genre_id"])) {
         $genre_id = $_GET["genre_id"];
         $title = getFilmsByGenre($genre_id);
-        foreach (array_slice($title, 0, 5) as $title) {
-            echo "<div class='film'>";
-            echo "<img src='https://ichef.bbci.co.uk/news/976/cpsprodpb/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg' alt=''>";
-            echo "<h3>$title[0]</h3>";
-            echo "<p>15€</p>";
+        foreach (array_slice($title, 0, 15) as $title) {
+            $id = getId($title[0]);
+            $price =  getFilmPrice($id[0][0]);
+            $price = $price[0][0];
+            $poster = getPosterFromId($id[0][0]);
+            echo "<div class='film'><a href='film.php?name_film=$title[0]'>";
+            echo '<img class="poster" src="https://image.tmdb.org/t/p/original' . $poster[0][0] . '" alt="film poster">';
+            echo "<h3>$title[0]</h3></a>";
+            echo "<p>$price €</p>";
 
             echo "</a>";
             echo "</div>";
         }
     }
     ?>
+</div>
 </div>
 
 </body>
