@@ -189,6 +189,20 @@ function getTitleById($id)
   }
 }
 
+function getFilmByDirector($name)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT title FROM movies WHERE director LIKE "%' . $name . '%" LIMIT 25';
+    $title_statement = $db->prepare($sql);
+    $title_statement->execute();
+    $title = $title_statement->fetchAll();
+    return ($title);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
 
 function getIdByTitle($title)
 {
