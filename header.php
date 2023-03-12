@@ -18,8 +18,8 @@
     </a>
     <form class="search-bar" action="search_bar.php" method="GET">
       <input type="text" id="search-input" name="search" placeholder="Rechercher...">
-      <button type="submit" name="submit">Search</button>
-      <button type="submit" name="submit_director">Search by director</button>
+      <button class="button primary-button" type="submit" name="submit">Search</button>
+      <button class="button secondary-button" type="submit" name="submit_director">Search by director</button>
     </form>
     <a class="genre" href="genre.php">Genres</a>
     <!-- <span></span> -->

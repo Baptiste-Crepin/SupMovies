@@ -230,3 +230,48 @@
     margin-right: 1rem;
   }
 }
+
+/* Style de base pour les boutons */
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Style pour le bouton principal */
+.primary-button {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+/* Style pour le bouton secondaire */
+.secondary-button {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+/* Style pour le bouton avec une icône */
+.icon-button {
+  background-color:  #f5f5f5;
+  color: #fff;
+  padding: 12px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style pour le bouton au survol */
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
