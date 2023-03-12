@@ -31,8 +31,10 @@ require_once('database.php');
 if (isset($_GET["submit"])) {
   $res = $_GET["search"];
   $film = getTitle($res);
-  $id = getId($res);
-
+  $id = [];
+  foreach ($film as $filmTitle) {
+    array_push($id, getId($filmTitle[0]));
+  }
 ?>
 
 
