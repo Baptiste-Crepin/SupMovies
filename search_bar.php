@@ -41,7 +41,7 @@ if (isset($_GET["submit"])) {
   echo '<h1>Resultats de la recherche pour \'' . $res . '\'</h1>';
   echo '<div class="movie-list">';
   foreach ($film as $f) {
-    $a = getIdByTitle($f[0])[0][0];
+    $a = getId($f[0])[0][0];
     $infos = getInfosFilmFromId($a, ['title', 'poster_path', 'price', 'vote_average']);
     $movie = [
       'id' => $a,

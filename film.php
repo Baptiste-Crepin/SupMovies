@@ -18,7 +18,7 @@
             require_once('database.php');
             if (isset($_GET['name_film'])) {
                 $title = $_GET['name_film'];
-                $id_film  = getIdByTitle($title)[0][0];
+                $id_film  = getId($title)[0][0];
                 $options = ['overview', 'vote_average', 'poster_path', 'backdrop_path', 'director', 'actors', 'price'];
                 $filmInfos = getInfosFilmFromId($id_film, $options);
                 $actor = $filmInfos['actors'];

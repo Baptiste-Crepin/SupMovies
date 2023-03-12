@@ -30,7 +30,7 @@ function connectOnline(): PDO
   }
 }
 
-function connectLocalDb($onlineExecption = null): PDO | null
+function connectLocalDb(): PDO | null
 {
   require('credentials.php');
   try {
@@ -189,86 +189,6 @@ function getTitleById($id)
   }
 }
 
-function getActorById($id)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT actors FROM movies WHERE id = :id';
-    $actor_statement = $db->prepare($sql);
-    $actor_statement->execute([
-      'id' => $id,
-    ]);
-    $actor = $actor_statement->fetchAll();
-    return ($actor);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
-
-function getDirectorById($id)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT director FROM movies WHERE id = :id';
-    $director_statement = $db->prepare($sql);
-    $director_statement->execute([
-      'id' => $id,
-    ]);
-    $director = $director_statement->fetchAll();
-    return ($director);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
-
-function getRealeseDateById($id)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT release_date FROM movies WHERE id = :id';
-    $year_statement = $db->prepare($sql);
-    $year_statement->execute([
-      'id' => $id,
-    ]);
-    $year = $year_statement->fetchAll();
-    return ($year);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
-
-
-function getOverviewById($id)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT overview FROM movies WHERE id = :id';
-    $plot_statement = $db->prepare($sql);
-    $plot_statement->execute([
-      'id' => $id,
-    ]);
-    $plot = $plot_statement->fetchAll();
-    return ($plot);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
-
-function getRatingById($id)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT vote_average FROM movies WHERE id = :id';
-    $rating_statement = $db->prepare($sql);
-    $rating_statement->execute([
-      'id' => $id,
-    ]);
-    $rating = $rating_statement->fetchAll();
-    return ($rating);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
 
 function getIdByTitle($title)
 {
@@ -289,53 +209,11 @@ function getId($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT id FROM movies WHERE title LIKE "%' . $name . '%" LIMIT 25';
+    $sql = 'SELECT id FROM movies WHERE title LIKE "' . $name . '%" LIMIT 25';
     $id_statement = $db->prepare($sql);
     $id_statement->execute();
     $id = $id_statement->fetchAll();
     return ($id);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
-
-function getActor($name)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT actors FROM movies WHERE title LIKE ' % $name % '';
-    $actor_statement = $db->prepare($sql);
-    $actor_statement->execute();
-    $actor = $actor_statement->fetchAll();
-    return ($actor);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
-
-function  getDirector($name)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT director FROM movies WHERE title LIKE ' % $name % '';
-    $director_statement = $db->prepare($sql);
-    $director_statement->execute();
-    $director = $director_statement->fetchAll();
-    return ($director);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
-
-function getReleaseDate($name)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT release_date FROM movies WHERE title LIKE ' % $name % '';
-    $release_date_statement = $db->prepare($sql);
-    $release_date_statement->execute();
-    $release_date = $release_date_statement->fetchAll();
-    return ($release_date);
   } catch (Exception $e) {
     die($e);
   }
@@ -354,6 +232,8 @@ function getFilmsByGenre($genre)
     die($e);
   }
 }
+
+
 function getPosterFromId($id)
 {
   try {
@@ -416,15 +296,15 @@ function getInfosFilmFromId($id, $infos)
   }
 }
 
-function getQuantityFromId($owner, $value)
+function getQuantityFromId($owner, $id)
 {
   try {
     $db = connect();
-    $sql = 'SELECT quantity FROM cart_values WHERE owner = :owner and value = :value';
+    $sql = 'SELECT quantity FROM cart_values WHERE owner = :owner and value = :id';
     $cart_statement = $db->prepare($sql);
     $cart_statement->execute([
       'owner' => $owner,
-      'value' => $value,
+      'id' => $id,
     ]);
     $cart = $cart_statement->fetchAll();
     return ($cart);
