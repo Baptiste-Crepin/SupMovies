@@ -341,6 +341,19 @@ function getReleaseDate($name)
   }
 }
 
+function getFilmsByGenre($genre)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT original_title FROM movies WHERE genre_ids LIKE "%' . $genre . '%"';
+    $genre_statement = $db->prepare($sql);
+    $genre_statement->execute();
+    $genre = $genre_statement->fetchAll();
+    return ($genre);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
 function getPosterFromId($id)
 {
   try {
