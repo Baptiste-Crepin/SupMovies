@@ -205,6 +205,48 @@ function  getIdByTitle($title)
   }
 }
 
+function getBestAverage()
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT title FROM movies ORDER BY vote_average DESC LIMIT 15';
+    $title_statement = $db->prepare($sql);
+    $title_statement->execute();
+    $title = $title_statement->fetchAll();
+    return ($title);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getNewest()
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT title FROM movies ORDER BY release_date DESC LIMIT 15';
+    $title_statement = $db->prepare($sql);
+    $title_statement->execute();
+    $title = $title_statement->fetchAll();
+    return ($title);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
+function getLastest()
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT title FROM movies ORDER BY release_date ASC LIMIT 15';
+    $title_statement = $db->prepare($sql);
+    $title_statement->execute();
+    $title = $title_statement->fetchAll();
+    return ($title);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
 function getFilmByDirector($name)
 {
   try {
