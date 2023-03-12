@@ -59,6 +59,31 @@ if (isset($_GET["submit"])) {
 
 <?php
 }
+if (isset($_GET["submit_director"])) {
+  $res = $_GET["search"];
+  $film = getFilmByDirector($res);
+  $id = getId($res);
+?>
+
+
+  <?php
+  require_once('./movieCard.php');
+  echo '<h1>Search by director results for \'' . $res . '\'</h1>';
+  echo '<div class="movie-list">';
+  foreach ($film as $f) {
+    $a = getIdByTitle($f[0])[0][0];
+    $infos = getInfosFilmFromId($a, ['title', 'poster_path', 'price', 'vote_average']);
+    $movie = [
+      'id' => $a,
+      'title' => $infos['title'],
+      'poster' => $infos['poster_path'],
+      'price' => $infos['price'],
+      'voteAverage' => $infos['vote_average'],
+    ];
+    echo createMovieCard($movie);
+  }
+  echo '</div>';
+}
 ?>
 
 <style>
