@@ -163,11 +163,11 @@ function getTitle($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT original_title FROM movies WHERE original_title LIKE "%' . $name . '%" LIMIT 25';
-    $original_tittle_statement = $db->prepare($sql);
-    $original_tittle_statement->execute();
-    $original_title = $original_tittle_statement->fetchAll();
-    return ($original_title);
+    $sql = 'SELECT title FROM movies WHERE title LIKE "%' . $name . '%" LIMIT 25';
+    $title_statement = $db->prepare($sql);
+    $title_statement->execute();
+    $title = $title_statement->fetchAll();
+    return ($title);
   } catch (Exception $e) {
     die($e);
   }
@@ -177,13 +177,13 @@ function getTitleById($id)
 {
   try {
     $db = connect();
-    $sql = 'SELECT original_title FROM movies WHERE id = :id';
-    $original_tittle_statement = $db->prepare($sql);
-    $original_tittle_statement->execute([
+    $sql = 'SELECT title FROM movies WHERE id = :id';
+    $title_statement = $db->prepare($sql);
+    $title_statement->execute([
       'id' => $id,
     ]);
-    $original_title = $original_tittle_statement->fetchAll();
-    return ($original_title);
+    $title = $title_statement->fetchAll();
+    return ($title);
   } catch (Exception $e) {
     die($e);
   }
@@ -274,7 +274,7 @@ function getIdByTitle($title)
 {
   try {
     $db = connect();
-    $sql = 'SELECT id FROM movies WHERE original_title LIKE "%' . $title . '%"';
+    $sql = 'SELECT id FROM movies WHERE title LIKE "%' . $title . '%"';
     $id_statement = $db->prepare($sql);
     $id_statement->execute();
     $id = $id_statement->fetchAll();
@@ -289,7 +289,7 @@ function getId($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT id FROM movies WHERE original_title LIKE "%' . $name . '%" LIMIT 25';
+    $sql = 'SELECT id FROM movies WHERE title LIKE "%' . $name . '%" LIMIT 25';
     $id_statement = $db->prepare($sql);
     $id_statement->execute();
     $id = $id_statement->fetchAll();
@@ -303,7 +303,7 @@ function getActor($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT actors FROM movies WHERE original_title LIKE ' % $name % '';
+    $sql = 'SELECT actors FROM movies WHERE title LIKE ' % $name % '';
     $actor_statement = $db->prepare($sql);
     $actor_statement->execute();
     $actor = $actor_statement->fetchAll();
@@ -317,7 +317,7 @@ function  getDirector($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT director FROM movies WHERE original_title LIKE ' % $name % '';
+    $sql = 'SELECT director FROM movies WHERE title LIKE ' % $name % '';
     $director_statement = $db->prepare($sql);
     $director_statement->execute();
     $director = $director_statement->fetchAll();
@@ -331,7 +331,7 @@ function getReleaseDate($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT release_date FROM movies WHERE original_title LIKE ' % $name % '';
+    $sql = 'SELECT release_date FROM movies WHERE title LIKE ' % $name % '';
     $release_date_statement = $db->prepare($sql);
     $release_date_statement->execute();
     $release_date = $release_date_statement->fetchAll();
@@ -345,7 +345,7 @@ function getFilmsByGenre($genre)
 {
   try {
     $db = connect();
-    $sql = 'SELECT original_title FROM movies WHERE genre_ids LIKE "%' . $genre . '%"';
+    $sql = 'SELECT title FROM movies WHERE genre_ids LIKE "%' . $genre . '%"';
     $genre_statement = $db->prepare($sql);
     $genre_statement->execute();
     $genre = $genre_statement->fetchAll();
