@@ -39,23 +39,38 @@ function getMovieArray($order, $limit = 5, $offset = 0)
 
 function createMovieCard($movie)
 {
-  return <<<HTML
-  <a class="movie-link" href="./film.php?name_film={$movie['title']}">
-  <div class="movie-card">
+  $output = <<<HTML
+    <a class="movie-link" href="./film.php?name_film={$movie['title']}">
+    <div class="movie-card">
     <img class="poster" draggable="false" loading="lazy" src="https://image.tmdb.org/t/p/original{$movie['poster']}">
     <h3 class="movie-title , flex">{$movie['title']}</h3>
       <div class="movie-infos">
         <div class="flex">
           <p> {$movie['voteAverage']} / 10</p>
-          <img class="icons orange" draggable="false" id="vote" src="./assets/icons/star-solid.svg">
+          <div class="star-group">
+    HTML;
+  for ($i = 1; $i <= round($movie['voteAverage'] / 2); $i++) {
+    $output .= <<<HTML
+    <img class="orange vote" draggable="false" src="./assets/icons/star-solid.svg">
+    HTML;
+  }
+  for ($i = 1; $i <= 5 - round($movie['voteAverage'] / 2); $i++) {
+    $output .= <<<HTML
+      <img class="vote" draggable="false" src="./assets/icons/star-solid.svg">
+      HTML;
+  }
+
+  $output .= <<<HTML
+              </div>
+            </div>
+            <div class="flex">
+              <p> {$movie['price']} €</p>
+            </div>
+          </div>
         </div>
-        <div class="flex">
-          <p> {$movie['price']} €</p>
-        </div>
-      </div>
-    </div>
-  </a>
-  HTML;
+      </a>
+    HTML;
+  return $output;
 }
 
 function createTrailerSubCard($movie)

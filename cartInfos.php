@@ -77,7 +77,7 @@ function displayFilmList($filmList)
               <option value="defaultQuantity" selected>{$film['quantity']}</option>
       
     HTML;
-    for ($i = 1; $i <= 99; $i++) {
+    for ($i = 1; $i <= 10; $i++) {
       if ($i == $film['quantity']) continue;
       $output .= <<<HTML
               <option value="{$i}">{$i}</option>
