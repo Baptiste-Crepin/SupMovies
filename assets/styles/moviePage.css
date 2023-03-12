@@ -1,13 +1,28 @@
+:root {
+  --bg-image: url("");
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center 14vh;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(3px);
+  height: 100%;
+  overflow-x: hidden;
 }
 
 .poster {
   max-width: 30vw;
   max-height: 35vh;
-  /* position: absolute; */
   left: 5%;
   top: 12%;
 
@@ -40,21 +55,23 @@ nav a {
 }
 
 main {
-  max-width: 800px;
-  margin: 20px auto;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  width: 90%;
 }
 
 .film-details {
-  flex-basis: 60%;
+  background: rgb(50, 50, 50, 0.5);
+  color: white;
+  padding: 2rem;
+  width: auto;
 }
 
 .film-achat {
-  flex-basis: 35%;
-  background-color: #eee;
-  padding: 20px;
+  padding: 2rem;
+  background: rgba(50, 50, 50, 0.5);
+  color: white;
+  max-width: 12rem;
 }
 
 form {
@@ -94,6 +111,7 @@ footer {
   padding: 20px;
   text-align: center;
   margin-top: 20px;
+  width: 100vw;
 }
 
 .alert {
@@ -125,6 +143,17 @@ a.redirect {
   border-radius: 15px;
 }
 
+.backdrop {
+  width: 100%;
+  height: 105%;
+  object-fit: cover;
+  position: absolute;
+  z-index: -1;
+  filter: blur(3px);
+  top: 0;
+  left: 0;
+}
+
 /* Styles pour les médias mobiles */
 
 @media screen and (max-width: 768px) {
@@ -135,7 +164,7 @@ a.redirect {
   .film-details,
 
   .film-achat {
-    flex-basis: 100%;
+    max-width: 100%;
   }
 
   header h1 {

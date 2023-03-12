@@ -391,8 +391,7 @@ function getInfosFilmFromId($id, $infos)
 {
   try {
     $db = connect();
-    $sql = 'SELECT * FROM movies WHERE id = :id';
-    // $sql = 'SELECT ' . implode(',', $infos) . ' FROM movies WHERE id = :id';
+    $sql = 'SELECT ' . implode(',', $infos) . ' FROM movies WHERE id = :id';
     $cart_statement = $db->prepare($sql);
     $cart_statement->execute([
       'id' => $id,
