@@ -189,6 +189,22 @@ function getTitleById($id)
   }
 }
 
+function  getIdByTitle($title)
+{
+  try {
+    $db = connect();
+    $sql = 'SELECT id FROM movies WHERE title = :title';
+    $title_statement = $db->prepare($sql);
+    $title_statement->execute([
+      'title' => $title,
+    ]);
+    $title = $title_statement->fetchAll();
+    return ($title);
+  } catch (Exception $e) {
+    die($e);
+  }
+}
+
 function getFilmByDirector($name)
 {
   try {
