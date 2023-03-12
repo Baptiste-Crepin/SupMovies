@@ -46,7 +46,7 @@ function createMovieCard($movie)
     <h3 class="movie-title , flex">{$movie['title']}</h3>
       <div class="movie-infos">
         <div class="flex">
-          <p> {$movie['voteAverage']} </p>
+          <p> {$movie['voteAverage']} / 10</p>
           <img class="icons orange" draggable="false" id="vote" src="./assets/icons/star-solid.svg">
         </div>
         <div class="flex">
@@ -66,7 +66,7 @@ function createTrailerSubCard($movie)
     <h3 class="movie-title , flex">{$movie['title']}</h3>
     <div class="movie-infos">
       <div class="flex">
-        <p>{$movie['voteAverage']}</p>
+        <p>{$movie['voteAverage']} / 10</p>
         <img class="icons" draggable="false" id="vote" src="./assets/icons/star-solid.svg">
         <p>{$movie['price']} €</p>
       </div>

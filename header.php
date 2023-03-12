@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
   <link href="./assets/styles/header.css" media="all" rel="stylesheet" type="text/css">
   <link rel="icon" type="image/svg+xml" href="./assets/icons/clapperboard-solid.svg">
 </head>
+
 <body>
   <div id="header">
     <a href="./">
@@ -24,4 +26,5 @@
     echo displayAccount() ?>
   </div>
 </body>
+
 </html>

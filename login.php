@@ -28,7 +28,7 @@ function login(): void
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $maxAttempts = 10;
+  $maxAttempts = 5;
   // anti brute force
   // echo $_SESSION['counter'];
   if ($_SESSION['counter'] > $maxAttempts) {
