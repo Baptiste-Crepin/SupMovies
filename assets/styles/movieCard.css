@@ -109,7 +109,7 @@ section[id^="Page"] .poster {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: .4rem;
+  gap: .6rem;
 }
 
 .flex {
@@ -117,10 +117,13 @@ section[id^="Page"] .poster {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .flex p {
   margin: 0 .3rem;
+  white-space: nowrap;
+
 }
 
 .movie-card h3 {
@@ -194,4 +197,15 @@ section[id^="Page"] .poster {
 
 .page-swap button:hover {
   background: #bdc3c7;
+}
+
+.star-group {
+  flex-wrap: nowrap;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.vote {
+  height: 0.7em;
 }

@@ -40,7 +40,7 @@ function displayAccount(): string
   }
 
   $Img = getProfilePic();
-  // ?v= gives a diffenrent value each time you reload to force the browser to reload the cache for this particular picture
+  // v= gives a diffenrent value each time you reload to force the browser to reload the cache for this particular picture
   $Time = time();
 
 
@@ -58,9 +58,9 @@ function displayAccount(): string
       </label>
     
       <ul class="dropdown">
-        <li class="dropdown-content"><a href="./upload.php">Settings</a></li>
-        <li class="dropdown-content"><a href="./cart.php">Cart</a></li>
-        <li class="dropdown-content"><a href="./logout.php">Logout</a></li>
+        <li class="dropdown-content"><a class="dropdown-link" href="./upload.php">Settings</a></li>
+        <li class="dropdown-content"><a class="dropdown-link" href="./cart.php">Cart</a></li>
+        <li class="dropdown-content"><a class="dropdown-link" href="./logout.php">Logout</a></li>
       </ul>
     </div>
   </div>

@@ -16,12 +16,12 @@
     <a href="./">
       <h1>SupMovies</h1>
     </a>
-    <form action="search_bar.php" method="GET">
+    <form class="search-bar" action="search_bar.php" method="GET">
       <input type="text" id="search-input" name="search" placeholder="Rechercher...">
       <button type="submit" name="submit">Rechercher</button>
     </form>
-    <a href="genre.php">Genres</a>
-    <span></span>
+    <a class="genre" href="genre.php">Genres</a>
+    <!-- <span></span> -->
     <?php require_once('profilePic.php');
     echo displayAccount() ?>
   </div>

@@ -13,7 +13,7 @@ body {
 
   background-image: var(--bg-image);
   background-size: cover;
-  background-position: center 14vh;
+  background-position: center 5rem;
   background-repeat: no-repeat;
   backdrop-filter: blur(3px);
   height: 100%;
