@@ -190,28 +190,15 @@ function getTitleById($id)
 }
 
 
-function getIdByTitle($title)
+function getId($title)
 {
   try {
     $db = connect();
-    $sql = 'SELECT id FROM movies WHERE title LIKE "%' . $title . '%"';
+    $sql = 'SELECT id FROM movies WHERE title = :title';
     $id_statement = $db->prepare($sql);
-    $id_statement->execute();
-    $id = $id_statement->fetchAll();
-    return ($id);
-  } catch (Exception $e) {
-    die($e);
-  }
-}
-
-
-function getId($name)
-{
-  try {
-    $db = connect();
-    $sql = 'SELECT id FROM movies WHERE title LIKE "' . $name . '%" LIMIT 25';
-    $id_statement = $db->prepare($sql);
-    $id_statement->execute();
+    $id_statement->execute([
+      'title' => $title,
+    ]);
     $id = $id_statement->fetchAll();
     return ($id);
   } catch (Exception $e) {
