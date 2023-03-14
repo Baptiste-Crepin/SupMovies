@@ -1,3 +1,7 @@
+:root {
+  --bg-image: url("");
+}
+
 .trailer .video {
   width: 560px;
   height: 315px;
@@ -13,6 +17,13 @@
 .movie-link {
   text-decoration: none;
   color: inherit;
+}
+
+.carrousel-link {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
 }
 
 .trailer .movie-card {
@@ -55,6 +66,35 @@ section[id^="Page"] .poster {
   width: 80%;
 }
 
+label {
+  background: #00BFFF;
+  padding: .5rem 1rem;
+  border-radius: 50px;
+}
+
+label:hover {
+  background: #00FFFF;
+  padding: .5rem 1rem;
+  border-radius: 50px;
+}
+
+.movie-carrousel-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  background-color: #7f8c8d;
+  padding: 1rem;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(3px);
+  width: 90%;
+  height: 500px;
+}
+
 .movie-card-group {
   display: flex;
   gap: 1rem;
@@ -78,6 +118,18 @@ section[id^="Page"] .poster {
   height: 350px;
   color: black;
   font-weight: bold;
+}
+
+.carrousel-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 150px;
+  flex-direction: column;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+  color: white;
+  font-weight: bold;
+  backdrop-filter: blur(50px);
 }
 
 .movie-card:hover {
@@ -208,4 +260,47 @@ section[id^="Page"] .poster {
 
 .vote {
   height: 0.7em;
+}
+
+.carrousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.selector {
+  width: 80%;
+  height: 2rem;
+  background: #bdc3c7;
+  padding: 1rem;
+  color: black;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.film-selector {
+  visibility: collapse;
+}
+
+@media screen and (max-width: 768px) {
+  .movie-carrousel-group {
+    height: 300px;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .carrousel-card {
+    font-size: 0.6rem;
+    height: 43px;
+    width: 100%;
+  }
+
+  .movie-infos {
+    flex-direction: row;
+  }
 }

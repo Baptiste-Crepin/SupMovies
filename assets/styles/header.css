@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-around;
   width: 100vw;
-  min-height: 5rem;
+  min-height: 8rem;
   background-color: #1E272E;
   color: #fff;
   margin-bottom: 3rem;
@@ -99,6 +99,14 @@
   gap: 1rem;
 }
 
+#account .account-infos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
 #account .loginButton {
   margin-right: 4rem;
 }
@@ -141,8 +149,8 @@
   #header {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    min-height: 20vh;
+    justify-content: flex-start;
+    min-height: 15rem;
     flex-direction: column;
     gap: 1rem;
     position: relative;
@@ -159,12 +167,8 @@
     gap: 1em;
     align-self: end;
     position: absolute;
-    height: 4rem;
+    height: 5rem;
     top: 0;
-  }
-
-  #header #account p {
-    visibility: collapse;
   }
 
   #header #account .profilePic {
@@ -182,7 +186,7 @@
     gap: 0.5rem;
     align-self: end;
     position: absolute;
-    height: 4rem;
+    height: 5rem;
   }
 
   #header>a {
@@ -192,14 +196,9 @@
     color: inherit;
     width: 50%;
     align-self: baseline;
-    height: 4rem;
+    height: 5rem;
     justify-content: center;
     align-items: center;
-  }
-
-  #header .genre {
-    /* TODO change when button is done */
-    visibility: collapse;
   }
 
   .search-bar {
@@ -208,6 +207,7 @@
     align-items: center;
     width: 90%;
     gap: 1rem;
+    flex-direction: column;
   }
 
   #header input {
@@ -259,7 +259,7 @@
 
 /* Style pour le bouton avec une icône */
 .icon-button {
-  background-color:  #f5f5f5;
+  background-color: #f5f5f5;
   color: #fff;
   padding: 12px;
   border-radius: 50%;
@@ -274,4 +274,34 @@
 .button:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.button {
+  background: none;
+  width: 2rem;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.search-bar div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: row;
+}
+
+a.genre {
+  width: 50%;
+  height: 100%;
+}
+
+.secondary-button {
+  background-color: #f5f5f5;
+  color: #000;
+  width: fit-content;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+  width: 100%;
 }

@@ -14,27 +14,24 @@ if (isset($_GET['page'])) $currentPage = $_GET['page'] - 1;
 
 echo '<main>';
 
-// createTrailerCard('release_date');
-// createTrailerCard('popularity');
-// createTrailerCard('vote_average');
-
 if ($currentPage == 0) {
   echo <<<HTML
-    <div selector>
+    <div class="selector">
       <label for="option1">New</label>
-      <input type="radio" id="option1" name="options" onclick="showDiv('0')" checked>
+      <input type="radio" class='film-selector' id="option1" name="options" onclick="showDiv('0')" checked>
       <label for="option2">Highest Rated</label>
-      <input type="radio" id="option2" name="options" onclick="showDiv('1')">
+      <input type="radio" class='film-selector' id="option2" name="options" onclick="showDiv('1')">
       <label for="option3">Popular</label>
-      <input type="radio" id="option3" name="options" onclick="showDiv('2')">
-      <label for="option3">Vote</label>
-      <input type="radio" id="option3" name="options" onclick="showDiv('3')">
+      <input type="radio" class='film-selector' id="option3" name="options" onclick="showDiv('2')">
+      <label for="option4">Vote</label>
+      <input type="radio" class='film-selector' id="option4" name="options" onclick="showDiv('3')">
     </div>
     HTML;
-  echo $newMovies = createMovieCardGroup('New Movies', 'release_date', 10);
-  echo $highestRated = createMovieCardGroup('Highest Rated Movies', 'vote_average', 10);
-  echo $popularMovies = createMovieCardGroup('Popular Movies', 'popularity', 10);
-  echo $voteCount = createMovieCardGroup('Highest vote count', 'vote_count', 10);
+  $limit = 5;
+  echo $newMovies = createCarrousel('New Movies', 'release_date', $limit, 0, $carrousel = true);
+  echo $highestRated = createCarrousel('Highest Rated Movies', 'vote_average', $limit, 0, $carrousel = true);
+  echo $popularMovies = createCarrousel('Popular Movies', 'popularity', $limit, 0, $carrousel = true);
+  echo $voteCount = createCarrousel('Highest vote count', 'vote_count', $limit, 0, $carrousel = true);
 }
 
 
@@ -55,7 +52,74 @@ echo '</main>';
       movieGroups[i].style.display = 'none';
     }
     movieGroups[index].style.display = 'block';
+    cardGroup = document.getElementsByClassName('movie-carrousel-group')[index].childNodes
+    backdropImg = cardGroup[0].childNodes[1].childNodes[1].defaultValue
+    let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
+    document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
   }
 
   showDiv(0)
+
+  function caroussel() {
+    nbCarrousel = document.getElementsByClassName('movie-carrousel-group')
+    for (let carrousel = 0; carrousel < nbCarrousel.length; carrousel++) {
+      let cardGroup = document.getElementsByClassName('movie-carrousel-group')[carrousel].childNodes;
+
+      for (let i = 0; i < cardGroup.length - 1; i++) cardGroup[i].style.display = 'none'
+
+      cardGroup[0].style.display = 'flex'
+    }
+    cardGroup = document.getElementsByClassName('movie-carrousel-group')[0].childNodes
+    backdropImg = cardGroup[0].childNodes[1].childNodes[1].defaultValue
+    let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
+    document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
+    console.log(backdrop)
+  }
+
+  function CurrentCarrousel() {
+    currentCarrousel = document.getElementsByClassName('selector')[0].childNodes
+    inputID = 0
+    for (let i = 0; i < currentCarrousel.length; i++) {
+      if (currentCarrousel[i].tagName == 'INPUT') {
+        inputID++
+        if (currentCarrousel[i].checked) {
+          return inputID
+        }
+      }
+    }
+  }
+
+  function nextCard() {
+    currentCarrousel = CurrentCarrousel()
+    let cardGroup = document.getElementsByClassName('movie-carrousel-group')[currentCarrousel - 1].childNodes
+
+    for (let i = 0; i < cardGroup.length - 2; i++) {
+      if (cardGroup[i].style.display == 'flex') {
+        cardGroup[i].style.display = 'none'
+        cardGroup[i + 1].style.display = 'flex'
+        backdropImg = cardGroup[i + 1].childNodes[1].childNodes[1].defaultValue
+        let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
+        document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
+        return
+      }
+    }
+  }
+
+  function previousCard() {
+    currentCarrousel = CurrentCarrousel()
+    let cardGroup = document.getElementsByClassName('movie-carrousel-group')[currentCarrousel - 1].childNodes;
+    console.log(cardGroup);
+    for (let i = 0; i < cardGroup.length - 1; i++) {
+      if (cardGroup[i].style.display == 'flex') {
+        if (i == 0) return;
+        cardGroup[i].style.display = 'none'
+        cardGroup[i - 1].style.display = 'flex'
+        backdropImg = cardGroup[i - 1].childNodes[1].childNodes[1].defaultValue
+        let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
+        document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
+        return
+      }
+    }
+  }
+  caroussel()
 </script>

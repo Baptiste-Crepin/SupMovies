@@ -46,8 +46,10 @@ function displayAccount(): string
 
   return <<<HTML
   <div id="account">
+    <div class="account-infos">
+      <img class="profilePic" draggable="false" src="{$Img}" ?v={$Time} >
     <p> {$_SESSION['username']} </p>
-    <img class="profilePic" draggable="false" src="{$Img}" ?v={$Time} >
+    </div>
     
     <div class="buttons">
       <a href="./cart.php"><img class="icons orange" draggable="false" src="./assets/icons/cart-shopping-solid.svg"></a>

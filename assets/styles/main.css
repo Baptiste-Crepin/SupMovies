@@ -30,6 +30,16 @@ a {
   text-decoration: none;
   display: flex;
   justify-content: center;
+  align-items: center;
   text-align: center;
   color: inherit;
+}
+
+.selector {
+  width: 80%;
+  height: 2rem;
+  background: #bdc3c7;
+  padding: 1rem;
+  color: black;
+  font-weight: bold;
 }

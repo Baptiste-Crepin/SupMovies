@@ -7,20 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Baptiste Crepin, Martin Pierrache">
   <title>SupMovies</title>
-  <!-- <link href="./assets/styles/header.css" media="all" rel="stylesheet" type="text/css"> -->
 </head>
-<!-- <body>
-  <div id="header">
-    <a href="./">
-      <h1>SupMovies</h1>
-    </a>
-    <form method="post">
-      <input type="text" name="search">
-      <input type="submit" name="submit">
-    </form>
-    <span></span>
-  </div>
-</body> -->
 
 </html>
 
@@ -66,12 +53,12 @@ if (isset($_GET["submit_director"])) {
 ?>
 
 
-  <?php
+<?php
   require_once('./movieCard.php');
   echo '<h1>Search by director results for \'' . $res . '\'</h1>';
   echo '<div class="movie-list">';
   foreach ($film as $f) {
-    $a = getIdByTitle($f[0])[0][0];
+    $a = getId($f[0])[0][0];
     $infos = getInfosFilmFromId($a, ['title', 'poster_path', 'price', 'vote_average']);
     $movie = [
       'id' => $a,
