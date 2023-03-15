@@ -43,6 +43,7 @@
                     $actorURL = "https://api.themoviedb.org/3/person/$tempActor?api_key=" . $theMovieDbAPI . "&language=en-US";
                     $response = file_get_contents($actorURL);
                     $actorInfo = json_decode($response, true);
+                    if ($actorInfo['profile_path'] == null) continue;
                     $actorPoster = "https://image.tmdb.org/t/p/original" . $actorInfo['profile_path'];
                     $actorName = $actorInfo['name'];
                     echo '<div class="actor-infos">';
