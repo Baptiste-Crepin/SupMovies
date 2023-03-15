@@ -57,7 +57,9 @@ require_once('./footer.php')
     backdropImg = cardGroup[0].childNodes[1].childNodes[1].defaultValue
     let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
     document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
-    let leftArrow = document.getElementsByClassName('arrow')[index * 2]
+    let rightArrow = document.getElementsByClassName('arrow')[(index * 2) + 1]
+    let leftArrow = document.getElementsByClassName('arrow')[(index * 2)]
+    rightArrow.style.opacity = 100
     leftArrow.style.opacity = 0
   }
 
@@ -67,7 +69,7 @@ require_once('./footer.php')
     nbCarrousel = document.getElementsByClassName('movie-carrousel-group')
     for (let carrousel = 0; carrousel < nbCarrousel.length; carrousel++) {
       let cardGroup = document.getElementsByClassName('movie-carrousel-group')[carrousel].childNodes;
-
+      console.log(cardGroup)
       for (let i = 0; i < cardGroup.length - 1; i++) cardGroup[i].style.display = 'none'
 
       cardGroup[0].style.display = 'flex'
@@ -96,7 +98,6 @@ require_once('./footer.php')
   function nextCard() {
     currentCarrousel = CurrentCarrousel()
     let cardGroup = document.getElementsByClassName('movie-carrousel-group')[currentCarrousel - 1].childNodes
-
     for (let i = 0; i < cardGroup.length - 2; i++) {
       if (cardGroup[i].style.display == 'flex') {
         cardGroup[i].style.display = 'none'
