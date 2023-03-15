@@ -130,15 +130,6 @@ footer {
   border-radius: 50px;
 }
 
-.actor {
-  display: flex;
-  height: 20vh;
-  width: 10vw;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-
 a.redirect {
   width: 40%;
   text-align: center;
@@ -163,7 +154,23 @@ a.redirect {
   left: 0;
 }
 
-/* Styles pour les médias mobiles */
+.actor-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.actor-infos {
+  width: min-content;
+}
+
+.actor-name {
+  text-align: center;
+}
+
+.actor {
+  width: 7rem;
+}
 
 @media screen and (max-width: 768px) {
   main {

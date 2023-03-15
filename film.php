@@ -36,24 +36,22 @@
                 echo '<img class="poster" src="https://image.tmdb.org/t/p/w342' . $poster . '" alt="Film poster">';
                 echo '<p><strong>Réalisator:</strong> ' . $director . '</p>';
                 echo '<p><strong>Actors:</strong> </p><br>';
+                echo '<div class="actor-group">';
+                include('./credentials.php');
                 for ($i = 0; $i < 6; $i++) {
                     $tempActor = $actor[$i][0];
-                    $actorPoster = "https://api.themoviedb.org/3/person/$tempActor/images?api_key=75ad76108d63271d770861c00482be19";
-                    $actorPoster = file_get_contents($actorPoster);
-                    $actorPoster = json_decode($actorPoster, true);
-                    $actorPoster = $actorPoster['profiles'][0]['file_path'];
-                    $actorPoster = "https://image.tmdb.org/t/p/original" . $actorPoster;
-                    echo '<img class="actor" src="' . $actorPoster . '" alt="Film poster" style="width: 10vw; margin: 10px; margin-left: 2.2vw">';
+                    $actorURL = "https://api.themoviedb.org/3/person/$tempActor?api_key=" . $theMovieDbAPI . "&language=en-US";
+                    $response = file_get_contents($actorURL);
+                    $actorInfo = json_decode($response, true);
+                    $actorPoster = "https://image.tmdb.org/t/p/original" . $actorInfo['profile_path'];
+                    $actorName = $actorInfo['name'];
+                    echo '<div class="actor-infos">';
+                    echo '<img class="actor" src="' . $actorPoster . '" alt="actor picture">';
+                    echo '<p class="actor-name" >' . $actorName . '</p>';
+                    echo '</div>';
                 }
-                for ($i = 0; $i < 6; $i++) {
-                    $tempActor = $actor[$i][0];
-                    $actorName = "https://api.themoviedb.org/3/person/$tempActor?api_key=75ad76108d63271d770861c00482be19&language=en-US";
-                    $actorName = file_get_contents($actorName);
-                    $actorName = json_decode($actorName, true);
-                    $actorName = $actorName['name'];
-                    echo '<span style="margin-left: 6.5vw" >' . $actorName . '</span>';
-                }
-                
+                echo '</div>';
+
                 echo '<p>' . $overview . '</p>';
                 echo '<p><strong>Rating:</strong> ' . $rating . ' /10 </p>';
             }
