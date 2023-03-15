@@ -69,7 +69,6 @@ require_once('./footer.php')
     nbCarrousel = document.getElementsByClassName('movie-carrousel-group')
     for (let carrousel = 0; carrousel < nbCarrousel.length; carrousel++) {
       let cardGroup = document.getElementsByClassName('movie-carrousel-group')[carrousel].childNodes;
-      console.log(cardGroup)
       for (let i = 0; i < cardGroup.length - 1; i++) cardGroup[i].style.display = 'none'
 
       cardGroup[0].style.display = 'flex'
