@@ -82,9 +82,10 @@ h3 {
   height: 30vh;
   margin: 1rem 0;
   padding: 1rem;
-  background: #008080;
+  background: #bdc3c7;
   border: 10px solid;
   gap: 1rem;
+  color: black;
 }
 
 td:nth-child(1) {
@@ -109,7 +110,7 @@ td:nth-child(1) {
   font-size: larger;
   text-align: center;
   font-weight: bold;
-  background: #00B8B8;
+  background: #A7AFB4;
   border: none;
   color: white;
   border-radius: 25px;
@@ -128,8 +129,7 @@ td:nth-child(1) {
 .history {
   text-align: center;
   width: 80%;
-  /* background-color: #FF6347; */
-  background-color: #3E887F;
+  background-color: #6f7c7d;
 }
 
 .history-card {
@@ -138,13 +138,12 @@ td:nth-child(1) {
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  /* background-color: aqua; */
-  background-color: #3E886F;
+  background-color: #7f8c8d;
   padding: 1rem;
 }
 
 .history-card div {
-  background-color: #008080;
+  background-color: #bdc3c7;
   height: 50%;
   box-shadow: none;
   /* height: 275px; */
