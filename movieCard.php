@@ -183,7 +183,7 @@ function createCarrousel($title, $order, $limit = 10, $offset = 0)
       <section class="movie-group" id="{$title}">
       <h2 class="title"> {$title} </h2>
       <div class="carrousel">
-        <button onclick=previousCard()><img class="icons big" src="./assets/icons/left-long-solid.svg"></button>
+        <button onclick=previousCard()><img class="arrow icons big" src="./assets/icons/left-long-solid.svg"></button>
     HTML;
 
   $output .= <<<HTML
@@ -195,7 +195,7 @@ function createCarrousel($title, $order, $limit = 10, $offset = 0)
 
   $output .= <<<HTML
         </div>
-        <button onclick=nextCard()><img class="icons big" src="./assets/icons/right-long-solid.svg"></button>
+        <button onclick=nextCard()><img class="arrow icons big" src="./assets/icons/right-long-solid.svg"></button>
       </div>
     </section>
     HTML;

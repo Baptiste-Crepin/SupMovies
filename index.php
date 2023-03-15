@@ -57,6 +57,8 @@ require_once('./footer.php')
     backdropImg = cardGroup[0].childNodes[1].childNodes[1].defaultValue
     let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
     document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
+    let leftArrow = document.getElementsByClassName('arrow')[index * 2]
+    leftArrow.style.opacity = 0
   }
 
   showDiv(0)
@@ -74,6 +76,8 @@ require_once('./footer.php')
     backdropImg = cardGroup[0].childNodes[1].childNodes[1].defaultValue
     let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
     document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
+    let leftArrow = document.getElementsByClassName('arrow')[0]
+    leftArrow.style.opacity = 0
   }
 
   function CurrentCarrousel() {
@@ -100,6 +104,11 @@ require_once('./footer.php')
         backdropImg = cardGroup[i + 1].childNodes[1].childNodes[1].defaultValue
         let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
         document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
+        let rightArrow = document.getElementsByClassName('arrow')[(currentCarrousel * 2) - 1]
+        let leftArrow = document.getElementsByClassName('arrow')[(currentCarrousel * 2) - 2]
+        if (i == cardGroup.length - 3) rightArrow.style.opacity = 0
+        else leftArrow.style.opacity = 100
+
         return
       }
     }
@@ -116,6 +125,10 @@ require_once('./footer.php')
         backdropImg = cardGroup[i - 1].childNodes[1].childNodes[1].defaultValue
         let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
         document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
+        let rightArrow = document.getElementsByClassName('arrow')[(currentCarrousel * 2) - 1]
+        let leftArrow = document.getElementsByClassName('arrow')[(currentCarrousel * 2) - 2]
+        if (i == 1) leftArrow.style.opacity = 0
+        else rightArrow.style.opacity = 100
         return
       }
     }
