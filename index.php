@@ -42,6 +42,7 @@ echo createMovieCardGroup('Page ' . $currentPage + 1, 'release_date', 20, $curre
 
 echo pageSwap($currentPage);
 echo '</main>';
+require_once('./footer.php')
 
 ?>
 

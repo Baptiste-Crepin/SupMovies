@@ -173,5 +173,4 @@ require_once("./database.php");
             ?>
         </div>
     </div>
-
 </body>

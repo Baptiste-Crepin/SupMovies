@@ -62,9 +62,7 @@
         document.documentElement.style.setProperty('--bg-image', 'url(' +
             backdrop + ')');
     </script>
-    <footer>
-        <p>&copy; 2023 SupMovies. Tous droits réservés.</p>
-    </footer>
+    <?php require_once('./footer.php'); ?>
 </body>
 
 </html><?php

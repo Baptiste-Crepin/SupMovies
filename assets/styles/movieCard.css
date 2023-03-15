@@ -159,7 +159,7 @@ section[id^="Page"] .poster {
   color: #222;
 }
 
-.movie-infos {
+div.movie-infos {
   margin: 0 1rem;
   height: 8vh;
   display: flex;

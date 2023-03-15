@@ -55,6 +55,6 @@ displaySummary($totalPrice, $totalQuantity);
 echo '</main>';
 
 echo getHistory($owner);
-
+require_once('./footer.php')
 
 ?>
