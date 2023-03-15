@@ -22,6 +22,10 @@
                 $options = ['overview', 'vote_average', 'poster_path', 'backdrop_path', 'director', 'actors', 'price'];
                 $filmInfos = getInfosFilmFromId($id_film, $options);
                 $actor = $filmInfos['actors'];
+                $actor = str_replace(['[', ']'], '', $actor);
+                $actor = explode(',', $actor);
+                $actor = array_map('trim', $actor);
+                $actor = array_chunk($actor, 1);
                 $overview = $filmInfos['overview'];
                 $rating = $filmInfos['vote_average'];
                 $poster = $filmInfos['poster_path'];
@@ -31,7 +35,15 @@
                 echo '<h2>' . $title . '</h2>';
                 echo '<img class="poster" src="https://image.tmdb.org/t/p/w342' . $poster . '" alt="Affiche du film">';
                 echo '<p><strong>Réalisateur:</strong> ' . $director . '</p>';
-                echo '<p><strong>Acteur principal:</strong> ' . $actor . '</p>';
+                for ($i = 0; $i < 6; $i++) {
+                    $test = $actor[$i][0];
+                    $actorPoster = "https://api.themoviedb.org/3/person/$test/images?api_key=75ad76108d63271d770861c00482be19";
+                    $actorPoster = file_get_contents($actorPoster);
+                    $actorPoster = json_decode($actorPoster, true);
+                    $actorPoster = $actorPoster['profiles'][0]['file_path'];
+                    $actorPoster = "https://image.tmdb.org/t/p/original" . $actorPoster;
+                    echo '<img class="actor" src="' . $actorPoster . '" alt="Affiche du film" style="width: 10vw; margin: 10px; margin-left: 2.2vw">';
+                }
                 echo '<p>' . $overview . '</p>';
                 echo '<p><strong>Note:</strong> ' . $rating . ' /10 </p>';
             }

@@ -48,6 +48,13 @@ main {
     padding: 20px;
 }
 
+.actor {
+    display: flex;
+    width: 10vw;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 form {
     margin-top: 20px;
 }

@@ -130,6 +130,15 @@ footer {
   border-radius: 50px;
 }
 
+.actor {
+  display: flex;
+  height: 20vh;
+  width: 10vw;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
 a.redirect {
   width: 40%;
   text-align: center;
