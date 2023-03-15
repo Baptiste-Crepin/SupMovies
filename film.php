@@ -33,19 +33,29 @@
                 $director = $filmInfos['director'];
                 $price = $filmInfos['price'];
                 echo '<h2>' . $title . '</h2>';
-                echo '<img class="poster" src="https://image.tmdb.org/t/p/w342' . $poster . '" alt="Affiche du film">';
-                echo '<p><strong>Réalisateur:</strong> ' . $director . '</p>';
+                echo '<img class="poster" src="https://image.tmdb.org/t/p/w342' . $poster . '" alt="Film poster">';
+                echo '<p><strong>Réalisator:</strong> ' . $director . '</p>';
+                echo '<p><strong>Actors:</strong> </p><br>';
                 for ($i = 0; $i < 6; $i++) {
-                    $test = $actor[$i][0];
-                    $actorPoster = "https://api.themoviedb.org/3/person/$test/images?api_key=75ad76108d63271d770861c00482be19";
+                    $tempActor = $actor[$i][0];
+                    $actorPoster = "https://api.themoviedb.org/3/person/$tempActor/images?api_key=75ad76108d63271d770861c00482be19";
                     $actorPoster = file_get_contents($actorPoster);
                     $actorPoster = json_decode($actorPoster, true);
                     $actorPoster = $actorPoster['profiles'][0]['file_path'];
                     $actorPoster = "https://image.tmdb.org/t/p/original" . $actorPoster;
-                    echo '<img class="actor" src="' . $actorPoster . '" alt="Affiche du film" style="width: 10vw; margin: 10px; margin-left: 2.2vw">';
+                    echo '<img class="actor" src="' . $actorPoster . '" alt="Film poster" style="width: 10vw; margin: 10px; margin-left: 2.2vw">';
                 }
+                for ($i = 0; $i < 6; $i++) {
+                    $tempActor = $actor[$i][0];
+                    $actorName = "https://api.themoviedb.org/3/person/$tempActor?api_key=75ad76108d63271d770861c00482be19&language=en-US";
+                    $actorName = file_get_contents($actorName);
+                    $actorName = json_decode($actorName, true);
+                    $actorName = $actorName['name'];
+                    echo '<span style="margin-left: 6.5vw" >' . $actorName . '</span>';
+                }
+                
                 echo '<p>' . $overview . '</p>';
-                echo '<p><strong>Note:</strong> ' . $rating . ' /10 </p>';
+                echo '<p><strong>Rating:</strong> ' . $rating . ' /10 </p>';
             }
             ?>
         </div>
