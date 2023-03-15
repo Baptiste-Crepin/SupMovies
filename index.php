@@ -121,5 +121,8 @@ echo '</main>';
       }
     }
   }
+
+
+  setInterval(nextCard, 15000);
   caroussel()
 </script>

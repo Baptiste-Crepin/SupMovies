@@ -66,16 +66,21 @@ section[id^="Page"] .poster {
   width: 80%;
 }
 
-label {
+.selector label {
   background: #00BFFF;
   padding: .5rem 1rem;
   border-radius: 50px;
 }
 
-label:hover {
+.selector label:hover {
   background: #00FFFF;
   padding: .5rem 1rem;
   border-radius: 50px;
+}
+
+.carrousel button {
+  background: none;
+  border: none;
 }
 
 .movie-carrousel-group {
@@ -271,7 +276,6 @@ label:hover {
 
 .selector {
   width: 80%;
-  height: 2rem;
   background: #bdc3c7;
   padding: 1rem;
   color: black;
@@ -280,6 +284,8 @@ label:hover {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
+  height: fit-content;
 }
 
 .film-selector {
@@ -291,16 +297,17 @@ label:hover {
     height: 300px;
   }
 
-}
+  .movie-infos {
+    flex-direction: row;
+  }
 
-@media screen and (max-width: 400px) {
   .carrousel-card {
     font-size: 0.6rem;
     height: 43px;
     width: 100%;
   }
 
-  .movie-infos {
-    flex-direction: row;
+  .page-swap {
+    width: 85%;
   }
 }

@@ -135,6 +135,11 @@
   height: 1.5em;
 }
 
+
+.big {
+  height: 3rem;
+}
+
 .white {
   filter: invert(97%) sepia(97%) saturate(0%) hue-rotate(308deg) brightness(104%) contrast(104%);
 }
@@ -300,8 +305,8 @@ a.genre {
 .secondary-button {
   background-color: #f5f5f5;
   color: #000;
-  width: fit-content;
   margin-top: .5rem;
   margin-bottom: 1rem;
   width: 100%;
+  height: 75%;
 }
