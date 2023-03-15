@@ -335,12 +335,9 @@ function getMoviePack($order, $limit = 20, $offset = 0)
 {
   try {
     $db = connect();
-    $sql = 'SELECT * FROM movies ORDER BY :order DESC LIMIT :limit OFFSET :offset';
+    $sql = 'SELECT * FROM movies ORDER BY ' . $order . ' DESC LIMIT ' . $limit . ' OFFSET ' . $offset;
     $cart_statement = $db->prepare($sql);
-    $cart_statement->bindValue(':order', $order, PDO::PARAM_STR);
-    $cart_statement->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $cart_statement->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $cart_statement->execute();
+    $cart_statement->execute([]);
     $cart = $cart_statement->fetchAll();
     return ($cart);
   } catch (Exception $e) {
@@ -351,7 +348,7 @@ function getMoviePack($order, $limit = 20, $offset = 0)
 function getInfosFilmFromId($id, $infos)
 {
   try {
-    
+
     $db = connect();
     $sql = 'SELECT ' . implode(',', $infos) . ' FROM movies WHERE id = :id';
     $cart_statement = $db->prepare($sql);
