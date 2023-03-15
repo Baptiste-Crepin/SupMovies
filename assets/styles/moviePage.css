@@ -64,7 +64,7 @@ main {
   background: rgb(50, 50, 50, 0.5);
   color: white;
   padding: 2rem;
-  width: auto;
+  width: inherit;
 }
 
 .film-achat {
@@ -184,12 +184,13 @@ a.redirect {
 @media screen and (max-width: 768px) {
   main {
     flex-direction: column;
+    align-items: center;
   }
 
   .film-details,
-
   .film-achat {
-    max-width: 100%;
+    max-width: 90%;
+    width: 90%;
   }
 
   header h1 {
