@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Baptiste Crepin, Martin Pierrache">
+  <link href="./assets/styles/main.css" media="all" rel="stylesheet" type="text/css">
   <title>SupMovies</title>
 </head>
 
@@ -26,8 +27,15 @@ if (isset($_GET["submit"])) {
 
 
   <?php
+  if (count($film) == 0) {
+    echo '<h1> No results for \'' . $res . '\'</h1>';
+    return;
+  }
   require_once('./movieCard.php');
-  echo '<h1>Resultats de la recherche pour \'' . $res . '\'</h1>';
+  if ($res != "") {
+    echo '<h1>Results for \'' . $res . '\' :</h1>';
+  }
+
   echo '<div class="movie-list">';
   foreach ($film as $f) {
     $a = getId($f[0])[0][0];
@@ -47,6 +55,11 @@ if (isset($_GET["submit"])) {
 <?php
 }
 if (isset($_GET["submit_director"])) {
+  if (empty($_GET["search"])) {
+    echo "<h2>Please enter a director name</h2>";
+    return;
+  }
+
   $res = $_GET["search"];
   $film = getFilmByDirector($res);
   $id = getId($res);
@@ -54,6 +67,14 @@ if (isset($_GET["submit_director"])) {
 
 
 <?php
+  if (count($film) == 0) {
+    echo '<h1> No results for \'' . $res . '\'</h1>';
+    return;
+  }
+  require_once('./movieCard.php');
+  if ($res != "") {
+  }
+
   require_once('./movieCard.php');
   echo '<h1>Search by director results for \'' . $res . '\'</h1>';
   echo '<div class="movie-list">';
@@ -78,6 +99,7 @@ if (isset($_GET["submit_director"])) {
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .movie-card {

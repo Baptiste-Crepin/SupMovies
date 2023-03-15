@@ -29,7 +29,7 @@
                 $director = $filmInfos['director'];
                 $price = $filmInfos['price'];
                 echo '<h2>' . $title . '</h2>';
-                echo '<img class="poster" src="https://image.tmdb.org/t/p/original' . $poster . '" alt="Affiche du film">';
+                echo '<img class="poster" src="https://image.tmdb.org/t/p/w342' . $poster . '" alt="Affiche du film">';
                 echo '<p><strong>Réalisateur:</strong> ' . $director . '</p>';
                 echo '<p><strong>Acteur principal:</strong> ' . $actor . '</p>';
                 echo '<p>' . $overview . '</p>';

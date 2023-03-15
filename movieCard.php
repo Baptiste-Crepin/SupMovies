@@ -43,7 +43,7 @@ function createMovieCard($movie)
   $output = <<<HTML
     <a class="movie-link" href="./film.php?name_film={$movie['title']}">
     <div class="movie-card">
-    <img class="poster" draggable="false" loading="lazy" src="https://image.tmdb.org/t/p/original{$movie['poster']}">
+    <img class="poster" draggable="false" loading="lazy" src="https://image.tmdb.org/t/p/w342{$movie['poster']}">
     <h3 class="movie-title , flex">{$movie['title']}</h3>
       <div class="movie-infos">
         <div class="flex">
@@ -132,7 +132,7 @@ function createTrailerCard($order)
   $movie = getMovie($order, 1);
   return <<<HTML
    <section class="trailer">
-   <img class="backdrop" draggable="false" src="https://image.tmdb.org/t/p/original{$movie['backdrop']}">
+   <img class="backdrop" draggable="false" src="https://image.tmdb.org/t/p/w342{$movie['backdrop']}">
    createTrailerSubCard($movie);
    </section>
   HTML;

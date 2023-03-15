@@ -19,10 +19,10 @@
     <form class="search-bar" action="search_bar.php" method="GET">
       <div class="search-bar">
         <input type="text" id="search-input" name="search" placeholder="Rechercher...">
-        <button class="button primary-button" type="submit" name="submit"><img class="search white" src="./assets/icons/magnifying-glass-solid.svg"></button>
+        <button class="button primary-button" type="submit" name="submit"><img class="search" src="./assets/icons/magnifying-glass-solid.svg"></button>
       </div>
       <div>
-        <a class="genre" href="genre.php"><button class="button secondary-button" name="submit_director">Genre</button></a>
+        <a class="genre" href="genre.php"><button class="button secondary-button" type="button">Genre</button></a>
         <button class="button secondary-button" type="submit" name="submit_director">Search by director</button>
       </div>
     </form>

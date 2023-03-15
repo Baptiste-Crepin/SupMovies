@@ -23,9 +23,7 @@ function getHistory($owner)
       $cartHistory .= '<h2>' . $entryInfo['timestamp'] . '</h2>';
       $cartHistory .= '<div class="history-card">';
       foreach ($movieIdList as $id) {
-        // echo $id;
         $filmInfos = getInfosFilmFromId($id, $infos);
-        // var_dump($filmInfos);
         $historyFilmList[$id] = [
           'id' => $id,
           'title' => $filmInfos['title'],
@@ -36,14 +34,11 @@ function getHistory($owner)
         $cartHistory .= createMovieCard($historyFilmList[$id]);
       }
       $cartHistory .= '</div>';
-      // var_dump($historyFilmList);
     }
   }
   $cartHistory .= '</div>';
   return $cartHistory;
 }
-
-$cartHistory = getHistory($owner);
 
 if (count($filmList) == 0) {
   echo '<h2>Your cart is empty</h2>';
@@ -59,7 +54,7 @@ displayFilmList($filmList);
 displaySummary($totalPrice, $totalQuantity);
 echo '</main>';
 
-echo $cartHistory;
+echo getHistory($owner);
 
 
 ?>

@@ -73,7 +73,6 @@ echo '</main>';
     backdropImg = cardGroup[0].childNodes[1].childNodes[1].defaultValue
     let backdrop = 'https://image.tmdb.org/t/p/original' + backdropImg;
     document.documentElement.style.setProperty('--bg-image', 'url(' + backdrop + ')');
-    console.log(backdrop)
   }
 
   function CurrentCarrousel() {
@@ -108,7 +107,6 @@ echo '</main>';
   function previousCard() {
     currentCarrousel = CurrentCarrousel()
     let cardGroup = document.getElementsByClassName('movie-carrousel-group')[currentCarrousel - 1].childNodes;
-    console.log(cardGroup);
     for (let i = 0; i < cardGroup.length - 1; i++) {
       if (cardGroup[i].style.display == 'flex') {
         if (i == 0) return;
@@ -123,6 +121,6 @@ echo '</main>';
   }
 
 
-  setInterval(nextCard, 15000);
+  // setInterval(nextCard, 15000);
   caroussel()
 </script>

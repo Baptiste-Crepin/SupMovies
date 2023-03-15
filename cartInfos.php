@@ -107,7 +107,7 @@ function displayFilmList($filmList)
       </td>
       <td>
         <a href="./film.php?name_film={$film['title']}">
-          <img class="poster" src="https://image.tmdb.org/t/p/original{$film['poster']}">
+          <img class="poster" src="https://image.tmdb.org/t/p/w342{$film['poster']}">
         </a>
       </td>
     </tr>
