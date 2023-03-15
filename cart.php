@@ -40,6 +40,8 @@ function getHistory($owner)
   return $cartHistory;
 }
 
+$cartHistory = getHistory($owner);
+
 if (count($filmList) == 0) {
   echo '<h2>Your cart is empty</h2>';
   echo $cartHistory;
@@ -54,7 +56,7 @@ displayFilmList($filmList);
 displaySummary($totalPrice, $totalQuantity);
 echo '</main>';
 
-echo getHistory($owner);
+echo $cartHistory;
 require_once('./footer.php')
 
 ?>

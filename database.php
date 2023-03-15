@@ -163,9 +163,11 @@ function getTitle($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT title FROM movies WHERE title LIKE "%' . $name . '%" LIMIT 25';
+    $sql = 'SELECT title FROM movies WHERE title LIKE :name LIMIT 25';
     $title_statement = $db->prepare($sql);
-    $title_statement->execute();
+    $title_statement->execute([
+      'name' => '%' . $name . '%',
+    ]);
     $title = $title_statement->fetchAll();
     return ($title);
   } catch (Exception $e) {
@@ -251,9 +253,11 @@ function getFilmByDirector($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT title FROM movies WHERE director LIKE "%' . $name . '%" LIMIT 25';
+    $sql = 'SELECT title FROM movies WHERE director LIKE :name LIMIT 25';
     $title_statement = $db->prepare($sql);
-    $title_statement->execute();
+    $title_statement->execute([
+      'name' => '%' . $name . '%',
+    ]);
     $title = $title_statement->fetchAll();
     return ($title);
   } catch (Exception $e) {
@@ -282,9 +286,11 @@ function getFilmsByGenre($genre)
 {
   try {
     $db = connect();
-    $sql = 'SELECT title FROM movies WHERE genre_ids LIKE "%' . $genre . '%"';
+    $sql = 'SELECT title FROM movies WHERE genre_ids LIKE :genre';
     $genre_statement = $db->prepare($sql);
-    $genre_statement->execute();
+    $genre_statement->execute([
+      'genre' => '%' . $genre . '%',
+    ]);
     $genre = $genre_statement->fetchAll();
     return ($genre);
   } catch (Exception $e) {
@@ -329,9 +335,12 @@ function getMoviePack($order, $limit = 20, $offset = 0)
 {
   try {
     $db = connect();
-    $sql = 'SELECT * FROM movies ORDER BY ' . $order . ' DESC LIMIT ' . $limit . ' OFFSET ' . $offset;
+    $sql = 'SELECT * FROM movies ORDER BY :order DESC LIMIT :limit OFFSET :offset';
     $cart_statement = $db->prepare($sql);
-    $cart_statement->execute([]);
+    $cart_statement->bindValue(':order', $order, PDO::PARAM_STR);
+    $cart_statement->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $cart_statement->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $cart_statement->execute();
     $cart = $cart_statement->fetchAll();
     return ($cart);
   } catch (Exception $e) {
@@ -342,9 +351,11 @@ function getMoviePack($order, $limit = 20, $offset = 0)
 function getInfosFilmFromId($id, $infos)
 {
   try {
+    
     $db = connect();
     $sql = 'SELECT ' . implode(',', $infos) . ' FROM movies WHERE id = :id';
     $cart_statement = $db->prepare($sql);
+    $cart_statement->bindValue(':offset', $infos, PDO::PARAM_INT);
     $cart_statement->execute([
       'id' => $id,
     ]);
@@ -419,7 +430,9 @@ function addEntry($owner, $value, $quantity = 1)
     $cart = $cart_statement->fetchAll();
     return ($cart);
   } catch (Exception $e) {
-    die($e);
+    if ($e->getCode() == 23000) {
+      setQuantity($owner, $value, $quantity);
+    }
   }
 }
 

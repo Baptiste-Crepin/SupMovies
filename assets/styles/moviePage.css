@@ -128,6 +128,15 @@ footer {
   background: #eee;
   border: 10px solid;
   border-radius: 50px;
+  z-index: 2;
+}
+
+.block {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  backdrop-filter: blur(5px);
+  z-index: 1;
 }
 
 a.redirect {

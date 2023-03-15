@@ -90,14 +90,17 @@
             if (!isset($_GET['action']) || $_GET['action'] != 'Acheter') return;
             if (!isset($_GET['quantite']) || empty($_GET['quantite']) || $_GET['quantite'] == 1) {
                 addEntry($_SESSION['username'], $_GET['id']);
-            } else addEntry($_SESSION['username'], $_GET['id'], $_GET['quantite']);
+            } else {
+                addEntry($_SESSION['username'], $_GET['id'], $_GET['quantite']);
+            }
 
             echo <<<HTML
-    <div class='alert'>
-        <a class="redirect" href="index.php"><button>Continue browsing</button></a>
-        <a class="redirect" href="cart.php"><button>Go to cart</button></a>
-    </div>
-    HTML;
+                <div class='alert'>
+                    <a class="redirect" href="index.php"><button>Continue browsing</button></a>
+                    <a class="redirect" href="cart.php"><button>Go to cart</button></a>
+                </div>
+                <div class='block'></div>
+            HTML;
         }
         ?><style>
     .backdrop {
