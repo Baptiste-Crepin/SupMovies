@@ -10,7 +10,7 @@ Cela permet d'avoir acces a toute les fonctionnalités du site.
 
 Dans le cas ou vous souhaiteriez utiliser le site en local, aucune manipulation ne devrait etre necessaire et vous devriez etre connecté a la base de donnée hostée.
 
-En cas de problème, tout les mots de passes utiles se trouvent dans le fichier credentials.php et vous avez un script 'movies.sql' qui vous permettra de créer la base de donnée en local.
+En cas de problème, tout les mots de passes utiles se trouvent dans le fichier credentials.php et vous avez un script 'databaseCommands.sql' qui vous permettra de créer la base de donnée en local.
 
 ## Informations complémentaires
 
