@@ -18,7 +18,7 @@
     </a>
     <form class="search-bar" action="search_bar.php" method="GET">
       <div class="search-bar">
-        <input type="text" id="search-input" name="search" placeholder="Rechercher...">
+        <input type="text" id="search-input" name="search" placeholder="search...">
         <button class="button primary-button" type="submit" name="submit"><img class="search" src="./assets/icons/magnifying-glass-solid.svg"></button>
       </div>
       <div>

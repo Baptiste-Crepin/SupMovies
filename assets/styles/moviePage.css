@@ -179,6 +179,8 @@ a.redirect {
 
 .actor {
   width: 7rem;
+  aspect-ratio: 2/3;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 768px) {

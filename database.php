@@ -253,7 +253,7 @@ function getFilmByDirector($name)
 {
   try {
     $db = connect();
-    $sql = 'SELECT title FROM movies WHERE director LIKE :name LIMIT 25';
+    $sql = 'SELECT title FROM movies WHERE director LIKE :name LIMIT 15';
     $title_statement = $db->prepare($sql);
     $title_statement->execute([
       'name' => '%' . $name . '%',
@@ -295,7 +295,7 @@ function getFilmsByGenre($genre)
 {
   try {
     $db = connect();
-    $sql = 'SELECT title FROM movies WHERE genre_ids LIKE :genre';
+    $sql = 'SELECT title FROM movies WHERE genre_ids LIKE :genre LIMIT 15';
     $genre_statement = $db->prepare($sql);
     $genre_statement->execute([
       'genre' => '%' . $genre . '%',

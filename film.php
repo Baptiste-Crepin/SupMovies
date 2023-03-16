@@ -45,11 +45,14 @@
                     $actorURL = "https://api.themoviedb.org/3/person/$tempActor?api_key=" . $theMovieDbAPI . "&language=en-US";
                     $response = file_get_contents($actorURL);
                     $actorInfo = json_decode($response, true);
-                    if ($actorInfo['profile_path'] == null) continue;
                     $actorPoster = "https://image.tmdb.org/t/p/original" . $actorInfo['profile_path'];
                     $actorName = $actorInfo['name'];
                     echo '<div class="actor-infos">';
-                    echo '<img class="actor" src="' . $actorPoster . '" alt="actor picture">';
+                    if ($actorInfo['profile_path'] == null) {
+                        echo '<img class="actor" src="./assets/placeholder/Portrait_Placeholder.png" alt="Film poster">';
+                    } else {
+                        echo '<img class="actor" src="' . $actorPoster . '" alt="actor picture">';
+                    }
                     echo '<p class="actor-name" >' . $actorName . '</p>';
                     echo '</div>';
                 }
@@ -62,7 +65,7 @@
         </div>
         <div class="film-achat">
             <h2>Buy this film</h2>
-            <?php echo '<p>Prix:' . $price  . '€</p>' ?>
+            <?php echo '<p>Price:' . $price  . '€</p>' ?>
             <!-- <form> -->
             <form method="get" action="film.php">
                 <br>
@@ -74,7 +77,7 @@
                         <input type="hidden" id="id" name="id" value="{$id_film}">
                         <label for="quantite">Quantity:</label>
                         <input type="number" id="quantite" name="quantite" min="1" max="10" value="1">
-                        <input type="submit" name="action" value="Acheter">
+                        <input type="submit" name="action" value="buy">
                     HTML;
                 } ?>
             </form>
