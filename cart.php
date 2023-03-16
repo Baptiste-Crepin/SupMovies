@@ -12,10 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 function getHistory($owner)
 {
+  $historyCart = getCartHistory($owner);
+  if (count($historyCart) == 0) return;
   $cartHistory = '<div class="history">';
   $cartHistory .= '<h2>History</h2>';
   $IDArray = [];
-  foreach (getCartHistory($owner) as $entryInfo) {
+  foreach ($historyCart as $entryInfo) {
     array_push($IDArray, $entryInfo['value']);
     $movieIdList = explode(',', $entryInfo['value']);
     $infos = ['title', 'price', 'poster_path', 'vote_average'];

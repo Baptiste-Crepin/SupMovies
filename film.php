@@ -75,8 +75,8 @@
                     echo <<<HTML
                         <input type="hidden" id="name_film" name="name_film" value="{$_GET['name_film']}">
                         <input type="hidden" id="id" name="id" value="{$id_film}">
-                        <label for="quantite">Quantity:</label>
-                        <input type="number" id="quantite" name="quantite" min="1" max="10" value="1">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
                         <input type="submit" name="action" value="buy">
                     HTML;
                 } ?>
@@ -93,11 +93,11 @@
 
 </html><?php
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if (!isset($_GET['action']) || $_GET['action'] != 'Acheter') return;
-            if (!isset($_GET['quantite']) || empty($_GET['quantite']) || $_GET['quantite'] == 1) {
+            if (!isset($_GET['action']) || $_GET['action'] != 'buy') return;
+            if (!isset($_GET['quantity']) || empty($_GET['quantity']) || $_GET['quantity'] == 1) {
                 addEntry($_SESSION['username'], $_GET['id']);
             } else {
-                addEntry($_SESSION['username'], $_GET['id'], $_GET['quantite']);
+                addEntry($_SESSION['username'], $_GET['id'], $_GET['quantity']);
             }
 
             echo <<<HTML
