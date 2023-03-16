@@ -2,18 +2,6 @@
   --bg-image: url("");
 }
 
-.trailer .video {
-  width: 560px;
-  height: 315px;
-  box-shadow: 0 130px 1000px rgb(0, 0, 0);
-}
-
-.trailer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .movie-link {
   text-decoration: none;
   color: inherit;
@@ -28,11 +16,6 @@
   position: absolute;
   top: 10px;
   left: 10px;
-}
-
-.trailer .movie-card {
-  background: none;
-  box-shadow: none;
 }
 
 section[id^="Page"] :nth-child(2) .poster {

@@ -13,7 +13,6 @@ function getMovie($order)
     'backdrop' => $response['backdrop_path'],
     'price' => $response['price'],
     'voteAverage' => $response['vote_average'],
-    'trailer' => $response['trailer'],
   ];
   return $film;
 };
@@ -32,7 +31,6 @@ function getMovieArray($order, $limit = 5, $offset = 0)
       'backdrop' => $film['backdrop_path'],
       'price' => $film['price'],
       'voteAverage' => $film['vote_average'],
-      'trailer' => $film['trailer'],
     ];
   };
   return $movieList;
@@ -108,34 +106,6 @@ function createCarrouselCard($movie)
       </a>
     HTML;
   return $output;
-}
-
-function createTrailerSubCard($movie)
-{
-  //TODO: regarder comment ajouter une vidéo youtube
-  return <<<HTML
-  <div class="movie-card">
-    <h3 class="movie-title , flex">{$movie['title']}</h3>
-    <div class="movie-infos">
-      <div class="flex">
-        <p>{$movie['voteAverage']} / 10</p>
-        <img class="icons" draggable="false" id="vote" src="./assets/icons/star-solid.svg">
-        <p>{$movie['price']} €</p>
-      </div>
-    </div>
-  </div>
-  HTML;
-}
-
-function createTrailerCard($order)
-{
-  $movie = getMovie($order, 1);
-  return <<<HTML
-   <section class="trailer">
-   <img class="backdrop" draggable="false" src="https://image.tmdb.org/t/p/w342{$movie['backdrop']}">
-   createTrailerSubCard($movie);
-   </section>
-  HTML;
 }
 
 function createMovieCardGroup($title, $order, $limit = 10, $offset = 0, $carrousel = false)
