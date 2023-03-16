@@ -16,9 +16,11 @@
         <div class="film-details">
             <?php
             require_once('database.php');
-            if (isset($_GET['name_film'])) {
+            if (isset($_GET['name_film']) && !empty($_GET['name_film'])) {
                 $title = $_GET['name_film'];
-                $id_film  = getId($title)[0][0];
+                $id = getId($title);
+                if ($id == null) return;
+                $id_film  = $id[0][0];
                 $options = ['overview', 'vote_average', 'poster_path', 'backdrop_path', 'director', 'actors', 'price'];
                 $filmInfos = getInfosFilmFromId($id_film, $options);
                 $actor = $filmInfos['actors'];

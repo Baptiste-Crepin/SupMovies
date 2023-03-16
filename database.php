@@ -276,9 +276,18 @@ function getId($title)
       'title' => $title,
     ]);
     $id = $id_statement->fetchAll();
+    if (count($id) == 0) {
+      throw new Exception("No movie found");
+    };
     return ($id);
   } catch (Exception $e) {
-    die($e);
+    if ($e->getMessage() == "No movie found") {
+      echo '<h2>Sorry, this film is not available</h2>';
+      return;
+    } else {
+      echo $e->getMessage();
+      die($e);
+    }
   }
 }
 
