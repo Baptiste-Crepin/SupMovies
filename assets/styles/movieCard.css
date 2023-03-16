@@ -281,6 +281,12 @@ div.movie-infos {
   visibility: collapse;
 }
 
+div.movie-director {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .movie-carrousel-group {
     height: 300px;

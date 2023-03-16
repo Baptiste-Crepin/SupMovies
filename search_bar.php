@@ -38,10 +38,10 @@ if (isset($_GET["submit"])) {
 
   echo '<div class="movie-list">';
   foreach ($film as $f) {
-    $a = getId($f[0])[0][0];
-    $infos = getInfosFilmFromId($a, ['title', 'poster_path', 'price', 'vote_average']);
+    $id = getId($f[0])[0][0];
+    $infos = getInfosFilmFromId($id, ['title', 'poster_path', 'price', 'vote_average']);
     $movie = [
-      'id' => $a,
+      'id' => $id,
       'title' => $infos['title'],
       'poster' => $infos['poster_path'],
       'price' => $infos['price'],
@@ -62,7 +62,6 @@ if (isset($_GET["submit_director"])) {
 
   $res = $_GET["search"];
   $film = getFilmByDirector($res);
-  $id = getId($res);
 ?>
 
 
@@ -79,16 +78,19 @@ if (isset($_GET["submit_director"])) {
   echo '<h1>Search by director results for \'' . $res . '\'</h1>';
   echo '<div class="movie-list">';
   foreach ($film as $f) {
-    $a = getId($f[0])[0][0];
-    $infos = getInfosFilmFromId($a, ['title', 'poster_path', 'price', 'vote_average']);
+    $id = getId($f[0])[0][0];
+    $infos = getInfosFilmFromId($id, ['title', 'poster_path', 'price', 'vote_average', 'director']);
     $movie = [
-      'id' => $a,
+      'id' => $id,
       'title' => $infos['title'],
       'poster' => $infos['poster_path'],
       'price' => $infos['price'],
       'voteAverage' => $infos['vote_average'],
     ];
+    echo '<div class="movie-director">';
+    echo '<h3>' . $infos['director'] . '</h3>';
     echo createMovieCard($movie);
+    echo '</div>';
   }
   echo '</div>';
 }
