@@ -26,7 +26,11 @@ function connectOnline(): PDO
       $dbPass,
     );
   } catch (Exception $e) {
-    echo $e->getMessage();
+    if ($e->getCode() == 1226) {
+      die('<h1>Error, to many conections to the database</h1><p>Try again later</p>');
+    } else {
+      echo $e->getMessage();
+    }
   }
 }
 
