@@ -37,11 +37,15 @@
                 echo '<h2>' . $title . '</h2>';
                 echo '<img class="poster" src="https://image.tmdb.org/t/p/w342' . $poster . '" alt="Film poster">';
                 echo '<p><strong>Réalisator:</strong> ' . $director . '</p>';
-                echo '<p><strong>Actors:</strong> </p><br>';
+                if (count($actor) != 1) {
+                    echo '<p><strong>Actors:</strong> </p><br>';
+                }
                 echo '<div class="actor-group">';
                 include('./credentials.php');
-                for ($i = 0; $i < 6; $i++) {
+
+                for ($i = 0; $i < count($actor) - 1; $i++) {
                     $tempActor = $actor[$i][0];
+
                     $actorURL = "https://api.themoviedb.org/3/person/$tempActor?api_key=" . $theMovieDbAPI . "&language=en-US";
                     $response = file_get_contents($actorURL);
                     $actorInfo = json_decode($response, true);
